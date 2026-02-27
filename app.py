@@ -1,59 +1,46 @@
 import streamlit as st
 import google.generativeai as genai
 
-# Configuração da Inteligência Artificial
+# Configuração da IA com tratamento de erro
 try:
-    genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-    model = genai.GenerativeModel('gemini-1.5-flash')
-except:
-    st.error("Erro na configuração da Chave API. Verifique os Secrets.")
+    if "GOOGLE_API_KEY" in st.secrets:
+        genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+        model = genai.GenerativeModel('gemini-1.5-flash')
+    else:
+        st.error("Chave API não encontrada nos Secrets do Streamlit.")
+except Exception as e:
+    st.error(f"Erro ao configurar IA: {e}")
 
 st.set_page_config(page_title="L'IDÉE MAISON", page_icon="⚜️")
-
 st.title("⚜️ L'IDÉE MAISON - Diagnóstico de Visagismo")
-st.write("Descubra a essência da sua imagem pessoal através do nosso mestre visagista.")
 
-# --- QUESTIONÁRIO COMPLETO ---
+# --- QUESTIONÁRIO ---
 with st.form("meu_formulario"):
     st.subheader("Características Físicas")
     formato_rosto = st.selectbox("Qual o formato do seu rosto?", ["Oval", "Redondo", "Quadrado", "Coração", "Diamante", "Retangular"])
     olhos = st.selectbox("Como são seus olhos?", ["Amendoados", "Arredondados", "Caídos", "Pequenos", "Proeminentes"])
-    
-    # Campo do nariz restaurado
     nariz = st.selectbox("Qual o formato do seu nariz?", ["Fino/Reto", "Largo", "Adunco", "Arrebitado", "Sinuoso"])
     
-    st.subheader("Análise Psicológica")
-    # Campo dos temperamentos restaurado
+    st.subheader("Análise de Temperamento")
+    # ESTA É A PARTE QUE ESTAVA FALTANDO:
     temperamento = st.radio("Com qual temperamento você mais se identifica?", 
-                             ["Sanguíneo (Extrovertido/Alegre)", 
-                              "Melancólico (Analítico/Sério)", 
-                              "Colérico (Líder/Determinado)", 
-                              "Fleumático (Calmo/Paciente)"])
+                             ["Sanguíneo (Extrovertido e Comunicativo)", 
+                              "Melancólico (Analítico e Detalhista)", 
+                              "Colérico (Determinado e Líder)", 
+                              "Fleumático (Calmo e Diplomático)"])
     
-    objetivo = st.text_area("Qual mensagem você deseja passar com sua imagem? (Ex: Autoridade, Acessibilidade, Criatividade)")
-
+    objetivo = st.text_area("Qual mensagem você deseja passar com sua imagem?")
     submeter = st.form_submit_button("GERAR DIAGNÓSTICO MESTRE")
 
-# --- LÓGICA DE RESPOSTA DA IA ---
+# --- RESPOSTA ---
 if submeter:
-    with st.spinner("A Maison está analisando seu perfil..."):
-        prompt = f"""
-        Você é um mestre visagista de luxo da Maison L'IDÉE. 
-        Analise estas características: 
-        Rosto: {formato_rosto}, Olhos: {olhos}, Nariz: {nariz}, Temperamento: {temperamento}.
-        Objetivo: {objetivo}.
-        Dê um diagnóstico detalhado, elegante e sugira melhorias na imagem. 
-        Seja sofisticado na linguagem.
-        """
+    with st.spinner("Consultando o Mestre Visagista..."):
+        prompt = f"Aja como um visagista de luxo da Maison L'IDÉE. Analise: Rosto {formato_rosto}, Olhos {olhos}, Nariz {nariz}, Temperamento {temperamento}. Objetivo: {objetivo}."
         try:
             response = model.generate_content(prompt)
-            st.markdown("### ⚜️ Seu Diagnóstico Exclusivo")
+            st.markdown("### ⚜️ Seu Diagnóstico")
             st.write(response.text)
-            
-            # --- ÁREA DE PAGAMENTO ---
             st.divider()
-            st.info("Para um cronograma completo e consultoria personalizada, finalize sua reserva abaixo:")
             st.link_button("ADQUIRIR CONSULTORIA COMPLETA", "https://mpago.la/2FcahRg")
-            
         except Exception as e:
-            st.error("Houve um erro ao processar seu diagnóstico. Verifique sua conexão ou a Chave API.")
+            st.error("Erro ao gerar resposta. Verifique sua Chave API nos Secrets.")
