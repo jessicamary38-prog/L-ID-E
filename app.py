@@ -1,47 +1,43 @@
 import streamlit as st
 import google.generativeai as genai
 
-# 1. Configuração da IA (Corrigida para evitar o erro 404)
+# 1. Configuração da IA (Modelo alterado para resolver o Erro 404)
 try:
     if "GOOGLE_API_KEY" in st.secrets:
         genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-        # Alteramos para 'gemini-pro' para garantir compatibilidade
+        # Usamos 'gemini-pro' para garantir que sua chave funcione agora
         model = genai.GenerativeModel('gemini-pro')
     else:
-        st.error("Chave API não encontrada nos Secrets.")
+        st.error("Chave API não encontrada nos Secrets do Streamlit.")
 except Exception as e:
-    st.error(f"Erro na conexão: {e}")
+    st.error(f"Erro técnico de conexão: {e}")
 
 st.set_page_config(page_title="L'IDÉE MAISON", page_icon="⚜️")
 st.title("⚜️ L'IDÉE MAISON - Diagnóstico 360º")
 
+# --- FORMULÁRIO COMPLETO ---
 with st.form("diagnostico_completo"):
     nome = st.text_input("Nome da Cliente")
     
     st.subheader("🎨 Coloração Pessoal (Prioridade)")
     temperatura_pele = st.selectbox(
         "Temperatura da Pele (Guia das Veias)", 
-        [
-            "Fria (Veias Roxas/Azuis)", 
-            "Quente (Veias Verdes)", 
-            "Oliva (Fundo frio com tom amarelado)",
-            "Neutra"
-        ]
+        ["Fria (Veias Roxas/Azuis)", "Quente (Veias Verdes)", "Oliva (Fundo frio/Tom amarelado)", "Neutra"]
     )
     
     st.subheader("✨ Essências Faciais")
-    col_ess1, col_ess2 = st.columns(2)
-    with col_ess1:
+    col1, col2 = st.columns(2)
+    with col1:
         r1 = st.selectbox("Formato do Rosto", ["Longo", "Oval", "Quadrado", "Redondo", "Pequeno"])
         r2 = st.selectbox("Boca", ["Carnuda/Arredondada", "Larga/Aberta", "Pequena", "Fina"])
-    with col_ess2:
+    with col2:
         r3 = st.selectbox("Nariz", ["Pequeno", "Longo", "Largo", "Proporcional"])
         r4 = st.selectbox("Olhos", ["Redondos", "Rasgados", "Amendoados", "Médios"])
 
     st.subheader("📏 Estrutura Corporal (Kibbe)")
     altura = st.number_input("Altura (ex: 1.60)", min_value=1.0, max_value=2.5, value=1.60, step=0.01)
     p1 = st.selectbox("Estrutura Óssea", ["Estreita", "Larga", "Simétrica"])
-    curva = st.radio("Presença de Curvas nítidas?", ["Sim", "Não"])
+    curva = st.radio("Presença de Curvas?", ["Sim", "Não"])
     carne = st.selectbox("Textura da Carne", ["Densa/Firme", "Macia/Suave"])
 
     st.subheader("🧠 Temperamento")
@@ -51,18 +47,20 @@ with st.form("diagnostico_completo"):
     submeter = st.form_submit_button("GERAR DOSSIÊ DE ESTILO")
 
 if submeter:
-    # Lógica de processamento interna...
-    with st.spinner("Mestre Visagista processando análise 360º..."):
+    with st.spinner("O Mestre Visagista está redigindo seu diagnóstico..."):
         prompt = f"""
-        Aja como Mestre Visagista da Maison L'IDÉE. Cliente: {nome}.
-        PRIORIDADE: Coloração {temperatura_pele}. 
-        Kibbe, Essências ({r1}, {r2}, {r3}, {r4}) e Temperamento.
-        Crie um diagnóstico de luxo. Se Oliva, destaque o fundo frio.
+        Você é o Mestre Visagista da Maison L'IDÉE. 
+        Analise a cliente {nome}.
+        Prioridade Absoluta: Coloração {temperatura_pele}. 
+        Considere o Biotipo Kibbe, as Essências Faciais (Rosto {r1}, Boca {r2}, Nariz {r3}, Olhos {r4}) e o Temperamento {e1}/{e2}.
+        Crie um diagnóstico de luxo, elegante e detalhado.
         """
         try:
             response = model.generate_content(prompt)
+            st.markdown("### ⚜️ Seu Diagnóstico Exclusivo")
             st.markdown(response.text)
             st.divider()
+            # SEU LINK DE PAGAMENTO
             st.link_button("ADQUIRIR CONSULTORIA COMPLETA", "https://mpago.la/2FcahRg")
-        except:
-            st.error("Erro ao gerar. Verifique se a chave API nos Secrets está correta.")
+        except Exception as e:
+            st.error(f"Erro ao gerar diagnóstico. Verifique os Logs do sistema. Erro: {e}")
