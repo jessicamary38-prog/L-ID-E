@@ -1,21 +1,20 @@
 import streamlit as st
 import google.generativeai as genai
 
-# 1. Configuração da IA (Modelo alterado para resolver o Erro 404)
+# 1. Configuração da IA (Modelo alterado para GEMINI-PRO para evitar Erro 404)
 try:
     if "GOOGLE_API_KEY" in st.secrets:
         genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
-        # Usamos 'gemini-pro' para garantir que sua chave funcione agora
+        # O modelo 'gemini-pro' é o que resolverá o erro do log
         model = genai.GenerativeModel('gemini-pro')
     else:
-        st.error("Chave API não encontrada nos Secrets do Streamlit.")
+        st.error("Chave API não encontrada nos Secrets.")
 except Exception as e:
-    st.error(f"Erro técnico de conexão: {e}")
+    st.error(f"Erro na conexão: {e}")
 
 st.set_page_config(page_title="L'IDÉE MAISON", page_icon="⚜️")
 st.title("⚜️ L'IDÉE MAISON - Diagnóstico 360º")
 
-# --- FORMULÁRIO COMPLETO ---
 with st.form("diagnostico_completo"):
     nome = st.text_input("Nome da Cliente")
     
@@ -49,18 +48,15 @@ with st.form("diagnostico_completo"):
 if submeter:
     with st.spinner("O Mestre Visagista está redigindo seu diagnóstico..."):
         prompt = f"""
-        Você é o Mestre Visagista da Maison L'IDÉE. 
-        Analise a cliente {nome}.
-        Prioridade Absoluta: Coloração {temperatura_pele}. 
-        Considere o Biotipo Kibbe, as Essências Faciais (Rosto {r1}, Boca {r2}, Nariz {r3}, Olhos {r4}) e o Temperamento {e1}/{e2}.
-        Crie um diagnóstico de luxo, elegante e detalhado.
+        Você é o Mestre Visagista da Maison L'IDÉE. Analise {nome}.
+        Prioridade: Pele {temperatura_pele}. 
+        Considere Kibbe, Essências (Rosto {r1}, Boca {r2}, Nariz {r3}, Olhos {r4}) e Temperamento.
+        Crie um dossiê de luxo.
         """
         try:
             response = model.generate_content(prompt)
-            st.markdown("### ⚜️ Seu Diagnóstico Exclusivo")
             st.markdown(response.text)
             st.divider()
-            # SEU LINK DE PAGAMENTO
             st.link_button("ADQUIRIR CONSULTORIA COMPLETA", "https://mpago.la/2FcahRg")
         except Exception as e:
-            st.error(f"Erro ao gerar diagnóstico. Verifique os Logs do sistema. Erro: {e}")
+            st.error(f"Erro técnico: {e}. Verifique se a chave nos Secrets está ativa.")
