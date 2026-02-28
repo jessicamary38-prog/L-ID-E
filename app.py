@@ -1,4 +1,4 @@
-       import streamlit as st
+import streamlit as st
 
 # Configuração visual do Clube
 st.set_page_config(page_title="Clube Maison L'Idée", page_icon="⚜️")
@@ -21,7 +21,7 @@ with st.form("teste_estilo_clube"):
     submeter = st.form_submit_button("REVELAR MEU BIOTIPO")
 
 if submeter:
-    # Lógica interna de identificação
+    # Lógica interna de identificação automática (sem erros de IA)
     resultado = ""
     if altura == "Acima de 1.70m":
         resultado = "Família Dramática ou Natural (Linhas Longas)"
@@ -41,16 +41,15 @@ if submeter:
     
     st.info("""
     Como membro do Clube, você terá acesso a:
-    * **Identificação de Essências Faciais** (Análise detalhada)
-    * **Diagnóstico de Coloração Pessoal** (Pele Oliva e Veias)
+    * **Identificação de Essências Faciais** (Análise detalhada via fotos)
+    * **Diagnóstico de Coloração Pessoal** (Incluindo Pele Oliva)
     * **Montagem de Looks e Visita ao Closet**
-    * **Bioestética: Treinos específicos para o seu Kibbe**
+    * **Bioestética: Treinos específicos para o seu biotipo Kibbe**
     """)
     
-    # Configuração do WhatsApp
+    # Configuração do seu WhatsApp direto
     meu_numero = "5515996398197" 
-    msg = f"Olá! Sou {nome}, fiz o teste no Clube Maison L'Idée e quero agendar minha análise completa e conhecer os treinos!"
+    msg = f"Olá! Sou {nome}, fiz o teste no Clube Maison L'Idée e quero agendar minha análise completa e saber sobre os treinos!"
     link_wa = f"https://wa.me/{meu_numero}?text={msg}"
     
     st.link_button("💬 FALAR COM A MAISON PELO WHATSAPP", link_wa)
-     
