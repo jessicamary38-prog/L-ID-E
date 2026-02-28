@@ -1,4 +1,4 @@
-        st.divider()
+            st.divider()
     
     # Frase para conversão de consultoria completa
     st.markdown("""
