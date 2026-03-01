@@ -1,13 +1,14 @@
 import streamlit as st
+import os
 
-# --- 1. CONFIGURAÇÕES TÉCNICAS E ESTILO ---
+# --- 1. CONFIGURAÇÕES DE PÁGINA E ESTILO ---
 st.set_page_config(
-    page_title="Maison L'Idée - Consultoria", 
+    page_title="Maison L'Idée - Jéssica Maria", 
     page_icon="⚜️", 
     layout="centered"
 )
 
-# Estilização CSS para um visual Premium
+# Estilização para o visual de Luxo/Consultoria
 st.markdown("""
     <style>
     .main { background-color: #fcfaf7; }
@@ -16,132 +17,115 @@ st.markdown("""
         color: white;
         border-radius: 10px;
         font-weight: bold;
-        transition: 0.3s;
+        border: none;
+        width: 100%;
     }
     .stButton>button:hover {
         background-color: #B8860B;
-        border-color: #B8860B;
     }
-    h1, h2, h3 { color: #4a3728; }
+    h1, h2, h3 { color: #4a3728; font-family: 'serif'; }
+    .st-emotion-cache-16idsys p { font-size: 1.1rem; line-height: 1.6; color: #5D4037; }
     </style>
     """, unsafe_allow_html=True)
 
-# --- 2. FUNÇÕES DE CADA PÁGINA ---
+# --- 2. FUNÇÕES DAS PÁGINAS ---
 
 def pagina_inicio():
-    st.title("⚜️ Bem-vinda à Maison L'Idée")
-    st.subheader("Consultoria de Imagem Estratégica & Geometria Corporal")
+    st.title("⚜️ Maison L'Idée")
+    st.subheader("O Olhar por trás da Maison")
     
-    st.image("https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1000", caption="Elegância e Estratégia")
+    # Banner Principal
+    st.image("https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1000")
     
     st.divider()
     
-    # SEÇÃO: QUEM SOU EU
     col1, col2 = st.columns([1, 2])
+    
     with col1:
-        # Sugestão: Substitua por uma foto sua hospedada online
-        st.image("https://cdn-icons-png.flaticon.com/512/607/607414.png", caption="Sua Consultora") 
+        # Tenta carregar sua foto perfil.jpg do GitHub
+        if os.path.exists("perfil.jpg"):
+            st.image("perfil.jpg", caption="Jéssica Maria")
+        else:
+            st.warning("⚠️ Suba sua foto como 'perfil.jpg' no GitHub.")
+        
+        st.markdown("### Conecte-se")
+        st.link_button("📸 INSTAGRAM", "https://www.instagram.com/jessicamargo.mr")
+        st.link_button("📌 PINTEREST", "https://www.pinterest.com/jessicamary38")
         
     with col2:
-        st.header("Quem Sou Eu")
-        st.write("""
-        Olá! Eu sou a mente por trás da **Maison L'Idée**. 
-        Especialista em **Sistemas Kibbe e Essências Faciais**, o meu trabalho é 
-        descodificar a geometria do seu corpo para que a sua imagem externa 
-        reflita a sua força interna. 
+        st.markdown("""
+        Sou uma apaixonada por moda que transformou a curiosidade em uma busca incessante pelas estratégias mais profundas de imagem. 
+        Minha jornada começou com os estudos dos métodos de **David Kibbe e John Kitchener**, onde me encantei pela forma como a estrutura física e as essências moldam quem somos.
+
+        No entanto, ao unir esses métodos, percebi que ainda faltava uma peça no quebra-cabeça: **a humanidade sistêmica**.
+
+        Há anos, mergulho nos estudos dos temperamentos, da neurociência e do comportamento humano. Dessa investigação nasceu o meu método exclusivo. Eu não olho apenas para a roupa; eu olho para a mulher como um sistema inteiro, integrando:
         
-        Acredito que a beleza é uma harmonia matemática e visual que todas possuímos. 
-        Aqui no Clube, ajudo mulheres a encontrarem o seu ID Visual com ciência e sensibilidade.
+        * **Corpo:** A geometria e as linhas naturais.
+        * **Face:** O visagismo que revela a identidade.
+        * **Essência:** Quem você é por dentro, refletido no seu exterior.
+
+        Para garantir a precisão dessa entrega, uni o sensível ao tecnológico. Desenvolvi tecnologias próprias através de **Engenharia de Prompts**, que utilizo para validar meu método e garantir que cada consultoria seja baseada em dados criteriosos e uma análise profunda.
+
+        Meu objetivo na **Maison L'Idée** é oferecer a você uma imagem que não seja apenas harmônica, mas que seja o reflexo fiel da sua força e vitalidade.
+
+        **Prazer, Jéssica Maria.**
         """)
-        
-        c1, c2 = st.columns(2)
-        with c1:
-            st.link_button("📸 INSTAGRAM", "https://instagram.com/seu_perfil") # Atualize seu link
-        with c2:
-            st.link_button("📌 PINTEREST", "https://pinterest.com/seu_perfil") # Atualize seu link
 
 def pagina_posts():
     st.title("📖 Journal Maison L'Idée")
-    st.write("Explore os nossos guias exclusivos para membros do Clube.")
+    st.write("Dicas de estilo e estratégia visual.")
     st.divider()
 
-    # Post 1
+    # --- PARA ADICIONAR NOVOS POSTS, COPIE O BLOCO ABAIXO ---
     c1, c2 = st.columns([1, 2])
     with c1:
         st.image("https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=400")
     with c2:
-        st.header("O Segredo da Linha Vertical")
-        st.write("A verticalidade no sistema Kibbe não é sobre sua altura real...")
-        with st.expander("Ler Post Completo"):
-            st.markdown("A linha vertical é a distância do ombro aos joelhos. Se você tem uma vertical alta, tecidos longos favorecem sua silhueta.")
-
+        st.header("A Força da Linha Vertical")
+        st.write("Descubra como o caimento das peças altera a percepção da sua estatura.")
+        with st.expander("Ler mais"):
+            st.write("No sistema Kibbe, a verticalidade define se o seu look deve ser contínuo ou se permite quebras visuais.")
     st.divider()
-
-    # Post 2
-    c3, c4 = st.columns([1, 2])
-    with c3:
-        st.image("https://images.unsplash.com/photo-1509631179647-0177331693ae?q=80&w=400")
-    with c4:
-        st.header("Essências Faciais")
-        st.write("O seu rosto comunica mensagens que o seu corpo confirma...")
-        with st.expander("Ler Post Completo"):
-            st.markdown("As Essências Faciais cuidam dos detalhes próximos ao rosto, como golas, brincos e maquiagem.")
+    # -------------------------------------------------------
 
 def pagina_teste_kibbe():
-    st.title("📏 Consultoria de Imagem: Sistema Kibbe")
-    st.info("Responda com base na sua geometria natural (sem roupas modeladoras).")
+    st.title("📏 Teste de Geometria Corporal (Kibbe)")
+    st.info("Responda com base na sua estrutura natural.")
 
-    with st.form("form_kibbe_final"):
+    with st.form("form_kibbe"):
         nome = st.text_input("Nome da cliente:")
-        altura = st.number_input("Altura (ex: 1.52):", min_value=1.0, max_value=2.20, value=1.60, step=0.01)
-        
+        altura = st.number_input("Altura (m):", min_value=1.0, max_value=2.20, value=1.60, step=0.01)
         st.divider()
-        st.subheader("--- TESTE DE GEOMETRIA CORPORAL ---")
+        p1 = st.radio("1. Como você parece nas fotos?", ["A) Longilínea", "B) Proporcional", "C) Petit"])
+        p2 = st.radio("2. Linha Ombro vs Quadril:", ["A) Reta ou V", "B) Simétrica", "C) Curva em 8"])
+        p3 = st.radio("3. Sensação da Carne/Pele:", ["A) Firme", "B) Macia"])
         
-        p1 = st.radio("1. Independente da altura real, como você parece nas fotos?", 
-                     ["A) Longilínea (pareço mais alta)", "B) Proporcional", "C) Petit (pareço pequena)"])
-
-        p2 = st.radio("2. Olhando a linha que vai do ombro ao quadril:", 
-                     ["A) É reta ou em V (ombros mandam)", "B) É contínua e simétrica", "C) É uma curva em 8 (quadril/busto saem da linha)"])
-
-        p3 = st.radio("3. A sensação da sua pele/músculo é:", 
-                     ["A) Firme e densa", "B) Macia e suave"])
-
-        submeter = st.form_submit_button("REVELAR VEREDITO KIBBE")
+        submeter = st.form_submit_button("REVELAR RESULTADO")
 
     if submeter:
         if not nome:
             st.warning("Por favor, digite o nome.")
         else:
-            resultado = ""
-            # LÓGICA DE PRECISÃO (SEU MÓDULO)
+            # Lógica de Altura Jéssica Maria
             if altura >= 1.70:
-                if "A)" in p2 and "A)" in p3: resultado = "DRAMATIC"
-                elif "C)" in p2 or "B)" in p3: resultado = "SOFT DRAMATIC"
-                else: resultado = "FLAMBOYANT NATURAL"
+                res = "DRAMATIC" if "A)" in p2 else "SOFT DRAMATIC"
             elif altura <= 1.62:
-                if "C)" in p2 and "B)" in p3:
-                    resultado = "ROMANTIC" if "C)" in p1 else "SOFT GAMINE"
-                elif "A)" in p2 or "A)" in p1: resultado = "FLAMBOYANT GAMINE"
-                elif "B)" in p2 and "B)" in p3: resultado = "THEATRICAL ROMANTIC"
-                else: resultado = "SOFT GAMINE"
+                res = "ROMANTIC" if "C)" in p2 else "SOFT GAMINE"
             else:
-                if "B)" in p2: resultado = "SOFT CLASSIC" if "B)" in p3 else "DRAMATIC CLASSIC"
-                elif "A)" in p2: resultado = "NATURAL" if "B)" in p3 else "FLAMBOYANT NATURAL"
-                else: resultado = "SOFT NATURAL"
-
-            st.success(f"### VEREDITO KIBBE PARA {nome.upper()}: {resultado}")
+                res = "CLASSIC FAMILY"
+            
+            st.success(f"### RESULTADO: {res}")
             
             # Botão WhatsApp
             whats = "5515996398197"
-            msg = f"Olá! Sou {nome}. Meu resultado no teste Kibbe foi: {resultado}. Quero agendar minha análise!"
-            st.link_button("💬 ENVIAR RESULTADO PARA A MAISON", f"https://wa.me/{whats}?text={msg.replace(' ', '%20')}")
+            msg = f"Olá Jéssica! Fiz o teste no site e meu resultado foi {res}. Quero agendar minha análise!"
+            st.link_button("💬 AGENDAR NO WHATSAPP", f"https://wa.me/{whats}?text={msg.replace(' ', '%20')}")
 
 # --- 3. NAVEGAÇÃO ---
 pg = st.navigation({
-    "Maison": [st.Page(pagina_inicio, title="Início", icon="🏠")],
-    "Conteúdo": [st.Page(pagina_posts, title="Journal / Blog", icon="📖")],
-    "Análise": [st.Page(pagina_teste_kibbe, title="Teste Kibbe Real", icon="📏")]
+    "Maison": [st.Page(pagina_inicio, title="A Maison", icon="🏠")],
+    "Conteúdo": [st.Page(pagina_posts, title="Journal", icon="📖")],
+    "Análise": [st.Page(pagina_teste_kibbe, title="Teste Kibbe", icon="📏")]
 })
-
 pg.run()
