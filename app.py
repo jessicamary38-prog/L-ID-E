@@ -8,7 +8,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Estilização CSS para o visual de Luxo e Consultoria
+# Estilização CSS Premium
 st.markdown("""
     <style>
     .main { background-color: #fcfaf7; }
@@ -37,7 +37,6 @@ def pagina_inicio():
     st.title("⚜️ Maison L'Idée")
     st.subheader("O Olhar por trás da Maison")
     
-    # --- BANNER PRINCIPAL ---
     if os.path.exists("banner.png"):
         st.image("banner.png")
     else:
@@ -46,15 +45,11 @@ def pagina_inicio():
     st.divider()
     
     col1, col2 = st.columns([1, 2])
-    
     with col1:
-        # --- FOTO DE PERFIL (Ajustado para o nome que está no seu GitHub) ---
         if os.path.exists("perfil.JPG"):
             st.image("perfil.JPG", caption="Jéssica Maria")
-        elif os.path.exists("perfil.JPG"):
-            st.image("perfil.JPG", caption="Jéssica Maria")
         else:
-            st.warning("Foto 'perfil.JPG' não encontrada.")
+            st.warning("Aguardando arquivo perfil.JPG")
         
         st.markdown("### Conecte-se")
         st.link_button("📸 INSTAGRAM", "https://www.instagram.com/jessicamargo.mr")
@@ -63,73 +58,103 @@ def pagina_inicio():
     with col2:
         st.markdown("""
         ### O Olhar por trás da Maison
-        
         Sou uma apaixonada por moda que transformou a curiosidade em uma busca incessante pelas estratégias mais profundas de imagem. 
-        Minha jornada começou com os estudos dos métodos de **David Kibbe e John Kitchener**, onde me encantei pela forma como a estrutura física e as essências moldam quem somos.
+        Minha jornada começou com os estudos dos métodos de **David Kibbe e John Kitchener**.
 
-        No entanto, ao unir esses métodos, percebi que ainda faltava uma peça no quebra-cabeça: **a humanidade sistêmica**.
+        No entanto, percebi que faltava a **humanidade sistêmica**. Integro corpo, face e essência através da neurociência e do comportamento.
 
-        Há anos, mergulho nos estudos dos temperamentos, da neurociência e do comportamento humano. Dessa investigação nasceu o meu método exclusivo. Eu não olho apenas para a roupa; eu olho para a mulher como um sistema inteiro, integrando corpo, face e essência.
-
-        Para garantir a precisão dessa entrega, uni o sensível ao tecnológico através de **Engenharia de Prompts**, garantindo que cada consultoria seja baseada em dados criteriosos.
+        Utilizo tecnologias de **Engenharia de Prompts** para validar cada consultoria com precisão.
 
         **Prazer, Jéssica Maria.**
         """)
 
 def pagina_posts():
     st.title("📖 O Método Maison L'Idée")
-    st.subheader("Uma Visão Sistêmica da Image")
-    
     if os.path.exists("banner.png"):
-        st.image("banner.png", caption="Curadoria Maison L'Idée")
+        st.image("banner.png")
     
     st.markdown("""
-    Na Maison L'Idée, não seguimos regras rígidas ou paletas genéricas. Nosso método é uma jornada profunda de autoconhecimento que une a precisão técnica ao bem-estar clínico.
-    """)
-
-    with st.expander("👗 Geometria Corporal (Kibbe)", expanded=True):
-        st.write("A análise da sua estrutura óssea e composição física para identificar sua geometria natural e criar harmonia visual.")
-
-    with st.expander("🎨 Essências de Estilo (Kitchener)", expanded=True):
-        st.write("O estudo do seu rosto e presença para revelar a mensagem que sua imagem comunica ao mundo.")
-
-    with st.expander("🧠 Temperamento e Comportamento", expanded=True):
-        st.write("Alinhamento da imagem ao seu sistema nervoso e personalidade através da neurociência.")
-
-    st.divider()
-    st.header("✨ Nosso Diferencial")
+    ### Uma Visão Sistêmica da Imagem
+    Na Maison L'Idée, unimos precisão técnica ao bem-estar clínico.
     
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown("**Validação Tecnológica:** Uso de Engenharia de Prompts para diagnósticos precisos.")
-        st.markdown("**Harmonia vs. Paletas:** Foco no Visagismo e identidade única.")
-    with c2:
-        st.markdown("**Foco na Vitalidade:** Beleza integrada ao bem-estar e saúde física.")
-        st.markdown("**Ciência e Cuidado:** Um olhar para a mulher como um sistema indissociável.")
-
-    st.link_button("👑 QUERO MINHA ANÁLISE SISTÊMICA", "https://wa.me/5515996398197?text=Olá%20Jéssica!%20Quero%20saber%20mais%20sobre%20o%20Método%20Maison.")
+    * **👗 Geometria Corporal (Kibbe):** Estudo da estrutura óssea e distribuição de carne.
+    * **🎨 Essências (Kitchener):** A mensagem do rosto e presença.
+    * **🧠 Neurociência:** Alinhamento da imagem ao temperamento.
+    """)
+    st.link_button("👑 QUERO MINHA ANÁLISE", "https://wa.me/5515996398197")
 
 def pagina_teste_kibbe():
-    st.title("📏 Teste de Geometria Corporal")
-    with st.form("form_kibbe"):
-        nome = st.text_input("Seu Nome:")
-        altura = st.number_input("Altura (m):", min_value=1.0, value=1.60, step=0.01)
-        p1 = st.radio("Percepção Visual:", ["A) Longilínea", "B) Proporcional", "C) Petit"])
-        p2 = st.radio("Linha Ombro/Quadril:", ["A) Reta/V", "B) Simétrica", "C) Curva"])
-        submeter = st.form_submit_button("VER RESULTADO")
+    st.title("📏 Teste de Geometria Corporal (Kibbe)")
+    st.info("Sistema de análise baseado na sua lógica de Scores Yin/Yang.")
+
+    with st.form("form_kibbe_final"):
+        nome = st.text_input("Nome da cliente:")
+        altura = st.number_input("Altura (ex: 1.52):", min_value=1.0, value=1.60, step=0.01)
+        
+        st.divider()
+        
+        p1 = st.selectbox("1. Escala Visual: Como você parece nas fotos?", 
+                         ["Selecione...", "A) Longilínea (pareço mais alta)", "B) Proporcional", "C) Petit (pareço pequena)"])
+        
+        p2 = st.selectbox("2. Geometria Ombro vs Quadril:", 
+                         ["Selecione...", "A) Reta ou em V (ombros mandam)", "B) Contínua e simétrica", "C) Curva em 8 (quadril/busto saem)"])
+        
+        p3 = st.selectbox("3. Sensação da Carne:", 
+                         ["Selecione...", "A) Firme e densa", "B) Macia e suave"])
+        
+        submeter = st.form_submit_button("REVELAR VEREDITO KIBBE")
 
     if submeter:
-        if altura >= 1.70: res = "DRAMATIC FAMILY"
-        elif altura <= 1.62: res = "GAMINE/ROMANTIC"
-        else: res = "CLASSIC/NATURAL"
-        
-        st.success(f"### RESULTADO: {res}")
-        st.link_button("💬 VALIDAR COM JÉSSICA MARIA", f"https://wa.me/5515996398197?text=Meu%20Kibbe%20deu%20{res}")
+        if "Selecione" in p1 or "Selecione" in p2 or "Selecione" in p3:
+            st.error("Por favor, responda todas as perguntas.")
+        else:
+            # --- IMPLEMENTAÇÃO DA SUA LÓGICA DE PROGRAMAÇÃO ---
+            resultado = ""
+            
+            # Extraindo apenas a letra da resposta
+            resp1 = p1[0]
+            resp2 = p2[0]
+            resp3 = p3[0]
+
+            # FAIXA ALTA (>= 1.70m)
+            if altura >= 1.70:
+                if resp2 == "A" and resp3 == "A": resultado = "DRAMATIC"
+                elif resp2 == "C" or resp3 == "B": resultado = "SOFT DRAMATIC"
+                else: resultado = "FLAMBOYANT NATURAL"
+
+            # FAIXA PETIT (<= 1.62m)
+            elif altura <= 1.62:
+                if resp2 == "C" and resp3 == "B":
+                    resultado = "ROMANTIC" if resp1 == "C" else "SOFT GAMINE"
+                elif resp2 == "A" or resp1 == "A":
+                    resultado = "FLAMBOYANT GAMINE"
+                elif resp2 == "B" and resp3 == "B":
+                    resultado = "THEATRICAL ROMANTIC"
+                else:
+                    resultado = "SOFT GAMINE"
+
+            # FAIXA MÉDIA (1.63m - 1.69m)
+            else:
+                if resp2 == "B":
+                    resultado = "SOFT CLASSIC" if resp3 == "B" else "DRAMATIC CLASSIC"
+                elif resp2 == "A":
+                    resultado = "NATURAL" if resp3 == "B" else "FLAMBOYANT NATURAL"
+                else:
+                    resultado = "SOFT NATURAL"
+
+            st.success(f"### VEREDITO KIBBE: {resultado}")
+            
+            # Imagem Instrutiva dos Corpos
+            
+
+            whats = "5515996398197"
+            msg = f"Olá Jéssica Maria! Fiz o teste no site. Meu nome é {nome}, tenho {altura}m e o veredito foi {resultado}. Quero agendar!"
+            st.link_button("💬 VALIDAR CONSULTORIA NO WHATSAPP", f"https://wa.me/{whats}?text={msg.replace(' ', '%20')}")
 
 # --- 3. NAVEGAÇÃO ---
 pg = st.navigation({
-    "A Maison": [st.Page(pagina_inicio, title="Início", icon="🏠")],
-    "O Método": [st.Page(pagina_posts, title="Journal", icon="📖")],
+    "Maison": [st.Page(pagina_inicio, title="Início", icon="🏠")],
+    "Método": [st.Page(pagina_posts, title="Journal", icon="📖")],
     "Análise": [st.Page(pagina_teste_kibbe, title="Teste Kibbe", icon="📏")]
 })
 pg.run()
