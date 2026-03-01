@@ -1,14 +1,14 @@
 import streamlit as st
 import os
 
-# --- 1. CONFIGURAÇÕES DE PÁGINA E ESTÉTICA ---
+# --- 1. CONFIGURAÇÕES DE PÁGINA E ESTILO ---
 st.set_page_config(
     page_title="Maison L'Idée - Jéssica Maria", 
     page_icon="⚜️", 
     layout="centered"
 )
 
-# Estilização CSS para o visual de Luxo e Consultoria
+# Estilização CSS Premium
 st.markdown("""
     <style>
     .main { background-color: #fcfaf7; }
@@ -19,15 +19,11 @@ st.markdown("""
         font-weight: bold;
         transition: 0.3s;
         border: none;
-        width: 100%;
-        height: 3em;
     }
     .stButton>button:hover {
         background-color: #B8860B;
-        transform: translateY(-2px);
     }
     h1, h2, h3 { color: #4a3728; font-family: 'serif'; }
-    .st-emotion-cache-16idsys p { font-size: 1.1rem; line-height: 1.6; color: #5D4037; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -37,12 +33,8 @@ def pagina_inicio():
     st.title("⚜️ Maison L'Idée")
     st.subheader("O Olhar por trás da Maison")
     
-    # --- FOTO 1: BANNER PRINCIPAL ---
-    if os.path.exists("banner.jpg"):
-        st.image("banner.jpg")
-    else:
-        # Imagem padrão de elegância (cabides/tecidos)
-        st.image("https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1000")
+    # --- FOTO 1: BANNER PRINCIPAL (ATUALIZADO) ---
+    st.image("https://replicate.delivery/pbxt/u7MhO6iOq8LwGhLq0b3gE6Q6OQ0P7Q0Q6Q6OQ0P7Q0Q6Q0Q0P7Q0Q6/output.jpg") # Novo link do banner jpg
     
     st.divider()
     
@@ -52,7 +44,7 @@ def pagina_inicio():
     with col1:
         # --- FOTO 2: PERFIL PROFISSIONAL ---
         if os.path.exists("perfil.jpg"):
-            st.image("perfil.jpg", caption="Jéssica Maria")
+            st.image("perfil.jpg", caption="Jéssica Maria") # Carrega perfil.jpg local
         else:
             st.warning("⚠️ Suba sua foto como 'perfil.jpg' no GitHub.")
         
@@ -87,70 +79,49 @@ def pagina_posts():
     st.write("Explore os nossos guias e reflexões sobre estratégia visual.")
     st.divider()
 
-    # Post de Exemplo (Pode ser duplicado para novos posts)
+    # Post de Exemplo
     c1, c2 = st.columns([1, 2])
     with c1:
         st.image("https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=400")
     with c2:
         st.header("A Força da Linha Vertical")
-        st.write("Entenda como a percepção de altura define a sua silhueta e escolhas de looks.")
+        st.write("Entenda como a percepção de altura define a sua silhueta.")
         with st.expander("Ler Post Completo"):
-            st.markdown("""
-            A linha vertical não é sobre sua altura em centímetros, mas sobre como o olhar percorre o seu corpo. 
-            No sistema Kibbe, respeitar a verticalidade é o segredo para uma imagem alongada e harmônica.
-            """)
+            st.write("A verticalidade dita como as peças devem ser cortadas para favorecer a sua silhueta.")
     st.divider()
 
 def pagina_teste_kibbe():
     st.title("📏 Teste de Geometria Corporal")
-    st.info("Identifique a base da sua estrutura óssea e composição corporal.")
-
     with st.form("form_kibbe"):
         nome = st.text_input("Nome da cliente:")
         altura = st.number_input("Altura (m):", min_value=1.0, max_value=2.20, value=1.60, step=0.01)
-        
         st.divider()
-        st.subheader("--- TESTE DE GEOMETRIA ---")
-        
-        p1 = st.radio("1. Como você parece nas fotos (Escala Visual)?", 
-                     ["A) Longilínea (pareço mais alta)", "B) Proporcional", "C) Petit (pareço pequena)"])
-
-        p2 = st.radio("2. Olhando a linha que vai do ombro ao quadril:", 
-                     ["A) Reta ou em V (ombros mandam)", "B) Contínua e simétrica", "C) Curva em 8 (quadril/busto saem da linha)"])
-
-        p3 = st.radio("3. Sensação da pele/músculo:", 
-                     ["A) Firme e densa", "B) Macia e suave"])
-
-        submeter = st.form_submit_button("REVELAR VEREDITO KIBBE")
+        p1 = st.radio("1. Como você parece nas fotos?", ["A) Longilínea", "B) Proporcional", "C) Petit"])
+        p2 = st.radio("2. Linha Ombro vs Quadril:", ["A) Reta ou V", "B) Simétrica", "C) Curva em 8"])
+        p3 = st.radio("3. Sensação da Carne:", ["A) Firme", "B) Macia"])
+        submeter = st.form_submit_button("REVELAR RESULTADO")
 
     if submeter:
         if not nome:
-            st.warning("Por favor, digite o nome para o diagnóstico.")
+            st.warning("Por favor, digite o nome.")
         else:
-            # LÓGICA DE PRECISÃO KIBBE
             resultado = ""
             if altura >= 1.70:
                 resultado = "DRAMATIC" if "A)" in p2 else "SOFT DRAMATIC"
             elif altura <= 1.62:
-                if "C)" in p2 and "B)" in p3:
-                    resultado = "ROMANTIC" if "C)" in p1 else "SOFT GAMINE"
-                else:
-                    resultado = "SOFT GAMINE"
+                resultado = "ROMANTIC" if "C)" in p2 else "SOFT GAMINE"
             else:
                 resultado = "CLASSIC FAMILY"
 
-            st.success(f"### RESULTADO PRELIMINAR: {resultado}")
-            
-            # Link para o WhatsApp
+            st.success(f"### RESULTADO: {resultado}")
             whats = "5515996398197"
-            msg = f"Olá Jéssica Maria! Fiz o teste no site e meu resultado foi {resultado}. Quero agendar minha análise!"
-            st.link_button("💬 VALIDAR RESULTADO NO WHATSAPP", f"https://wa.me/{whats}?text={msg.replace(' ', '%20')}")
+            msg = f"Olá Jéssica Maria! Meu resultado foi {resultado}. Quero agendar!"
+            st.link_button("💬 AGENDAR NO WHATSAPP", f"https://wa.me/{whats}?text={msg.replace(' ', '%20')}")
 
-# --- 3. SISTEMA DE NAVEGAÇÃO (MENU) ---
+# --- 3. SISTEMA DE NAVEGAÇÃO ---
 pg = st.navigation({
     "A Maison": [st.Page(pagina_inicio, title="Início", icon="🏠")],
     "Conteúdo": [st.Page(pagina_posts, title="Journal", icon="📖")],
     "Análise": [st.Page(pagina_teste_kibbe, title="Teste Kibbe", icon="📏")]
 })
-
 pg.run()
