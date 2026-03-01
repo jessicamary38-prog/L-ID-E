@@ -49,12 +49,12 @@ def pagina_inicio():
     
     with col1:
         # --- FOTO DE PERFIL (Ajustado para o nome que está no seu GitHub) ---
-        if os.path.exists("perfil_JPG"):
-            st.image("perfil_JPG", caption="Jéssica Maria")
-        elif os.path.exists("perfil.jpg"):
-            st.image("perfil.jpg", caption="Jéssica Maria")
+        if os.path.exists("perfil.JPG"):
+            st.image("perfil.JPG", caption="Jéssica Maria")
+        elif os.path.exists("perfil.JPG"):
+            st.image("perfil.JPG", caption="Jéssica Maria")
         else:
-            st.warning("Foto 'perfil_JPG' não encontrada.")
+            st.warning("Foto 'perfil.JPG' não encontrada.")
         
         st.markdown("### Conecte-se")
         st.link_button("📸 INSTAGRAM", "https://www.instagram.com/jessicamargo.mr")
