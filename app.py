@@ -1,4 +1,4 @@
-    import streamlit as st
+import streamlit as st
 import os
 
 # --- 1. CONFIGURAÇÕES DE PÁGINA ---
@@ -121,4 +121,20 @@ def pagina_analise_360():
     
     subtom_preliminar = ""
     if veias == "Verdes/Oliva": subtom_preliminar = "Quente"
-    elif ve
+    elif veias == "Azuis/Violeta": subtom_preliminar = "Frio"
+    else: subtom_preliminar = "Neutro"
+
+    if st.button("SOLICITAR DOSSIÊ PREMIUM"):
+        if not nome or not email:
+            st.error("Por favor, preencha nome e e-mail.")
+        else:
+            relatorio = f"TRIAGEM: {nome} | Kibbe: {kibbe_res} | Subtom: {subtom_preliminar} | Olhos: {r3} | Temp: {e1[0]}{e2[0]}{e3[0]}{e4[0]} | Scores: {pts}"
+            st.success("Dados prontos! Clique abaixo para falar com Jéssica.")
+            st.link_button("👑 ENVIAR PARA JÉSSICA MARIA", f"https://wa.me/5515996398197?text={relatorio.replace(' ', '%20')}")
+
+# --- 3. NAVEGAÇÃO ---
+pg = st.navigation({
+    "Maison": [st.Page(pagina_inicio, title="Início", icon="🏠")],
+    "Análise": [st.Page(pagina_analise_360, title="Triagem 360º", icon="📏")]
+})
+pg.run()
