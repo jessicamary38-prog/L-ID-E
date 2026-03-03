@@ -59,15 +59,16 @@ def pagina_journal():
 
 def pagina_analise_360():
     st.title("📏 Triagem Sistêmica 360º")
-    st.info("Preencha as etapas para o seu Relatório Premium.")
+    st.info("A Etapa 1 é um presente da Maison. As demais compõem seu Dossiê Premium.")
 
     nome = st.text_input("Nome da Cliente:").strip()
+    email = st.text_input("E-mail:")
     altura = st.number_input("Altura (ex: 1.60):", min_value=1.0, value=1.60, step=0.01)
 
     st.divider()
 
-    # --- ETAPA 1: KIBBE ---
-    st.markdown("### 👗 ETAPA 1: GEOMETRIA CORPORAL (KIBBE)")
+    # --- ETAPA 1: KIBBE (O BRINDE) ---
+    st.markdown("### 👗 ETAPA 1: GEOMETRIA CORPORAL (BRINDE)")
     c1, c2 = st.columns(2)
     with c1:
         p1 = st.radio("1. Estrutura Óssea:", ["A) Estreita", "B) Larga", "C) Simétrica"])
@@ -87,30 +88,46 @@ def pagina_analise_360():
         if curva == "S": kibbe_res = "SOFT NATURAL" if "B)" in p1 else "SOFT CLASSIC"
         else: kibbe_res = "NATURAL PURE" if "B)" in p1 else "CLASSIC / DRAMATIC CLASSIC"
 
+    if st.button("REVELAR MEU KIBBE (CORTESIA)"):
+        st.success(f"Seu resultado preliminar é: **{kibbe_res}**")
+
     st.divider()
 
-    # --- ETAPA 2: TEMPERAMENTO (LOGICA COMPLETA REINTEGRADA) ---
-    st.markdown("### 🧠 ETAPA 2: TEMPERAMENTO")
-    st.write("Responda com base no seu comportamento natural:")
-    
-    e1 = st.radio("1. Em lugares totalmente desconhecidos:", ["A) Sinto-me à vontade e interajo", "B) Sou observadora/Prefiro analisar"])
-    e2 = st.radio("2. Tomada de Decisão:", ["A) Racional/Lógica", "B) Emocional/Sentimental"])
-    e3 = st.radio("3. Velocidade de Reação:", ["A) Rápida e Imediata", "B) Lenta e Criteriosa"])
-    e4 = st.radio("4. Duração do Sentimento:", ["A) Curta (esqueço logo)", "B) Longa (guardo por muito tempo)"])
+    # --- ETAPA 2: ESSÊNCIAS (INTERNO) ---
+    st.markdown("### 🎨 ETAPA 2: ANÁLISE FACIAL")
+    f1 = st.selectbox("Formato do Rosto:", ["Longo", "Oval", "Quadrado", "Redondo", "Pequeno"])
+    f2 = st.selectbox("Formato dos Olhos:", ["Grandes e Redondos", "Rasgados/Feline", "Amendoados", "Médios/Simétricos"])
+    f3 = st.selectbox("Formato da Boca:", ["Carnuda", "Larga", "Pequena", "Fina"])
 
-    # Lógica de Veredito
-    temp_veredito = ""
-    if "A)" in e1 and "A)" in e2: temp_veredito = "COLÉRICO"
-    elif "A)" in e1 and "B)" in e2: temp_veredito = "SANGUÍNEO"
-    elif "B)" in e1 and "A)" in e2: temp_veredito = "MELANCÓLICO"
-    elif "B)" in e1 and "B)" in e2: temp_veredito = "FLEUMÁTICO"
+    st.divider()
 
-    if st.button("SOLICITAR DOSSIÊ PREMIUM"):
-        if not nome:
-            st.error("Por favor, preencha o seu nome.")
+    # --- ETAPA 3: TEMPERAMENTO (INTERNO) ---
+    st.markdown("### 🧠 ETAPA 3: TEMPERAMENTO")
+    t1 = st.radio("Comportamento em locais novos:", ["A) Extrovertida/Interajo", "B) Introvertida/Observo"])
+    t2 = st.radio("Decisões são mais:", ["A) Racionais", "B) Emocionais"])
+    t3 = st.radio("Reação a imprevistos:", ["A) Rápida", "B) Lenta/Criteriosa"])
+    t4 = st.radio("Duração dos sentimentos:", ["A) Curta", "B) Longa/Intensa"])
+
+    temp_res = ""
+    if "A)" in t1 and "A)" in t2: temp_res = "COLÉRICO"
+    elif "A)" in t1 and "B)" in t2: temp_res = "SANGUÍNEO"
+    elif "B)" in t1 and "A)" in t2: temp_res = "MELANCÓLICO"
+    elif "B)" in t1 and "B)" in t2: temp_res = "FLEUMÁTICO"
+
+    if st.button("SOLICITAR DOSSIÊ COMPLETO"):
+        if not nome or not email:
+            st.error("Por favor, preencha nome e e-mail.")
         else:
-            relatorio = f"*NOVA TRIAGEM 360º*%0A*Nome:* {nome}%0A*Kibbe:* {kibbe_res}%0A*Temperamento:* {temp_veredito}"
-            st.success(f"Triagem concluída! O seu temperamento predominante é: **{temp_veredito}**")
+            relatorio = (
+                f"*NOVA SOLICITAÇÃO DE DOSSIÊ*%0A"
+                f"*Nome:* {nome}%0A"
+                f"*Kibbe:* {kibbe_res}%0A"
+                f"*Rosto:* {f1}%0A"
+                f"*Olhos:* {f2}%0A"
+                f"*Boca:* {f3}%0A"
+                f"*Temperamento:* {temp_res}"
+            )
+            st.success("Dados processados! Clique no botão abaixo para me enviar.")
             st.link_button("👑 ENVIAR PARA JÉSSICA MARIA", f"https://wa.me/5515996398197?text={relatorio}")
 
 def pagina_modelo():
