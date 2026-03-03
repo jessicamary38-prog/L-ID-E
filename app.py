@@ -51,11 +51,22 @@ def pagina_journal():
     st.subheader("Journal: Visão Sistêmica")
     if os.path.exists("banner.png"):
         st.image("banner.png")
-    st.markdown("O método une a precisão técnica ao bem-estar e à **Bioestética**.")
+    
+    st.markdown("""
+    Na Maison L'Idée, não seguimos regras rígidas. Nosso método une a precisão técnica ao bem-estar e à **Bioestética**.
+    """)
     with st.expander("👗 Geometria Corporal (Kibbe)", expanded=True):
-        st.write("Estudo da estrutura óssea e muscular para harmonia física.")
+        st.write("Estudo da estrutura óssea e muscular para que as roupas moldem sua moldura física com harmonia e respeito às suas linhas naturais.")
+    
     with st.expander("🎨 Essências de Estilo (Kitchener)", expanded=True):
-        st.write("Análise da mensagem que o seu rosto transmite.")
+        st.write("Análise da mensagem que seu rosto e sua presença transmitem ao mundo através da geometria facial e traços expressivos.")
+    
+    with st.expander("🧠 Temperamento e Comportamento", expanded=True):
+        st.write("""
+        **O pilar invisível da sua imagem.** Investigamos como o seu sistema nervoso reage ao mundo (Neurociência). 
+        O temperamento define se sua energia é de execução, comunicação, análise ou estabilidade. 
+        Alinhar sua estética ao seu comportamento garante que você não apenas pareça confiante, mas que se sinta em casa na própria pele.
+        """)
 
 def pagina_analise_360():
     st.title("📏 Triagem Sistêmica 360º")
@@ -127,7 +138,7 @@ def pagina_analise_360():
                 f"*Boca:* {f3}%0A"
                 f"*Temperamento:* {temp_res}"
             )
-            st.success("Dados processados! Clique no botão abaixo para me enviar.")
+            st.success("Dados processados com sucesso!")
             st.link_button("👑 ENVIAR PARA JÉSSICA MARIA", f"https://wa.me/5515996398197?text={relatorio}")
 
 def pagina_modelo():
