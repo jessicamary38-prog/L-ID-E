@@ -43,12 +43,14 @@ def pagina_inicio():
         Integro corpo, face e essência através da neurociência e do comportamento humano. 
         Dessa investigação nasceu o meu método exclusivo: a **humanidade sistêmica**.
         
+        Utilizo tecnologias de **Engenharia de Prompts** para garantir que cada diagnóstico seja validado com precisão matemática e sensibilidade clínica.
+        
         **Prazer, Jéssica Maria.**
         """)
 
 def pagina_journal():
     st.title("📖 O Método Maison L'Idée")
-    st.subheader("Journal: Visão Sistêmica da Imagem")
+    st.subheader("Journal: Visão Sistêmica")
     if os.path.exists("banner.png"):
         st.image("banner.png")
     
@@ -98,29 +100,32 @@ def pagina_analise_360():
 
     st.divider()
 
-    # --- ETAPA 2: TEMPERAMENTO (REFINADO) ---
+    # --- ETAPA 3: TEMPERAMENTO ---
     st.markdown("### 🧠 ETAPA 2: TEMPERAMENTO")
     e1 = st.radio("1. Em lugares totalmente desconhecidos:", 
                  ["A) Sinto-me à vontade e interajo com facilidade", 
                   "B) Sou observadora, prefiro ver o ambiente antes"])
     
     if st.button("SOLICITAR DOSSIÊ PREMIUM"):
-        if not nome:
-            st.error("Por favor, preencha seu nome.")
+        if not nome or not email:
+            st.error("Por favor, preencha nome e e-mail.")
         else:
-            relatorio = f"Cliente: {nome}%0AKibbe: {kibbe_res}%0AComportamento: {e1}"
-            st.link_button("👑 ENVIAR PARA JÉSSICA MARIA", f"https://wa.me/5515996398197?text={relatorio}")
+            # Formatando mensagem para WhatsApp (removendo espaços vazios)
+            texto_zap = f"Olá Jéssica! Concluí minha Triagem 360.%0A*Nome:* {nome}%0A*Kibbe:* {kibbe_res}%0A*Comportamento:* {e1}"
+            st.success("Dados prontos! Clique no botão abaixo para me enviar no WhatsApp.")
+            st.link_button("👑 ENVIAR PARA JÉSSICA MARIA", f"https://wa.me/5515996398197?text={texto_zap}")
 
 def pagina_modelo():
     st.title("📔 Modelo de Consultoria")
     st.markdown("### Veja como será seu Dossiê")
     st.write("Explore um exemplo real do nível de entrega e profundidade da consultoria Maison L'Idée.")
-    # Link direto para o exemplo do Notion
     st.link_button("🔗 VER MODELO DE DOSSIÊ COMPLETO", "https://www.notion.so/Dossi-J-ssica-Maria-317f44f5bd8680c3b6a9e0ea0243822d")
-    st.info("Este documento é o seu guia estratégico de imagem e comportamento.")
 
 # --- 3. NAVEGAÇÃO ---
 pg = st.navigation({
     "Maison": [st.Page(pagina_inicio, title="Quem Sou Eu", icon="🏠")],
     "Método": [st.Page(pagina_journal, title="Journal", icon="📖")],
     "Análise": [st.Page(pagina_analise_360, title="Triagem 360º", icon="📏")],
+    "Exemplo": [st.Page(pagina_modelo, title="Modelo de Consultoria", icon="📔")]
+})
+pg.run()
