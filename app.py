@@ -94,4 +94,75 @@ def pagina_analise_360():
         else: kibbe_res = "NATURAL PURE" if "B)" in p1 else "CLASSIC / DRAMATIC CLASSIC"
 
     if st.button("REVELAR MEU KIBBE (CORTESIA)"):
-        st.
+        st.success(f"Resultado Preliminar: **{kibbe_res}**")
+
+    st.divider()
+
+    # --- ETAPA 2: ESSÊNCIAS ---
+    st.markdown("### 🎨 ETAPA 2: ESSÊNCIAS FACIAIS")
+    pts = {"Dramatic": 0, "Natural": 0, "Classic": 0, "Romantic": 0, "Gamine": 0, "Ingenue": 0}
+    r1 = st.selectbox("1. Formato do Rosto:", ["Longo", "Oval", "Quadrado", "Redondo", "Pequeno"])
+    if r1 == "Longo": pts["Dramatic"] += 40
+    elif r1 == "Oval": pts["Classic"] += 40
+    elif r1 == "Quadrado": pts["Natural"] += 40
+    elif r1 == "Redondo": pts["Ingenue"] += 20; pts["Romantic"] += 20
+    elif r1 == "Pequeno": pts["Gamine"] += 40
+
+    r2 = st.selectbox("2. Formato da Boca:", ["Carnuda/Arredondada", "Larga/Aberta", "Pequena", "Fina"])
+    if r2 == "Carnuda/Arredondada": pts["Romantic"] += 30
+    elif r2 == "Larga/Aberta": pts["Natural"] += 30
+    elif r2 == "Pequena": pts["Ingenue"] += 30
+    elif r2 == "Fina": pts["Dramatic"] += 15; pts["Gamine"] += 15
+
+    r3 = st.selectbox("3. Formato dos Olhos:", ["Grandes e Redondos", "Rasgados/Feline", "Amendoados", "Médios/Simétricos"])
+    if r3 == "Grandes e Redondos": pts["Ingenue"] += 10
+    elif r3 == "Rasgados/Feline": pts["Gamine"] += 10; pts["Dramatic"] += 5
+    elif r3 == "Amendoados": pts["Romantic"] += 10
+    elif r3 == "Médios/Simétricos": pts["Classic"] += 10
+
+    st.divider()
+
+    # --- ETAPA 3: TEMPERAMENTO (REFINADO) ---
+    st.markdown("### 🧠 ETAPA 3: TEMPERAMENTO")
+    e1 = st.radio("1. Em lugares totalmente desconhecidos:", 
+                 ["A) Sinto-me à vontade e interajo com facilidade (Extrovertida)", 
+                  "B) Sou observadora, prefiro ver o ambiente antes (Introvertida)"])
+    e2 = st.radio("2. Julgamento:", ["A) Racional", "B) Emocional"])
+    e3 = st.radio("3. Reação:", ["A) Rápida/Imediata", "B) Lenta/Criteriosa"])
+    e4 = st.radio("4. Duração:", ["A) Curta", "B) Longa"])
+
+    temp_veredito = ""
+    if "A)" in e1 and "A)" in e2: temp_veredito = "COLÉRICO"
+    elif "A)" in e1 and "B)" in e2: temp_veredito = "SANGUÍNEO"
+    elif "B)" in e1 and "A)" in e2: temp_veredito = "MELANCÓLICO"
+    elif "B)" in e1 and "B)" in e2: temp_veredito = "FLEUMÁTICO"
+
+    if st.button("SOLICITAR DOSSIÊ PREMIUM"):
+        if not nome or not email:
+            st.error("Por favor, preencha nome e e-mail.")
+        else:
+            relatorio = f"""*NOVA TRIAGEM 360º - MAISON*
+Cliente: {nome}
+Kibbe: {kibbe_res}
+Temperamento: {temp_veredito}
+Scores Faciais: {pts}"""
+            
+            st.success("Dados processados! Clique abaixo para enviar.")
+            st.link_button("👑 ENVIAR PARA JÉSSICA MARIA", f"https://wa.me/5515996398197?text={relatorio.replace(' ', '%20')}")
+
+def pagina_modelo():
+    st.title("📔 Modelo de Consultoria")
+    st.markdown("### Veja como é o seu Dossiê Completo")
+    st.write("Explore um exemplo real da entrega final da Maison L'Idée. O dossiê integra Kibbe, Kitchener e Neurociência.")
+    # Link direto para o exemplo do Notion
+    st.link_button("🔗 VER MODELO DE DOSSIÊ COMPLETO", "https://www.notion.so/Dossi-J-ssica-Maria-317f44f5bd8680c3b6a9e0ea0243822d")
+    st.info("Este documento é o mapa estratégico da sua imagem, validado com precisão clínica.")
+
+# --- 3. NAVEGAÇÃO ---
+pg = st.navigation({
+    "Maison": [st.Page(pagina_inicio, title="Início / Quem Sou Eu", icon="🏠")],
+    "Método": [st.Page(pagina_journal, title="Journal", icon="📖")],
+    "Análise": [st.Page(pagina_analise_360, title="Triagem 360º", icon="📏")],
+    "Exemplo": [st.Page(pagina_modelo, title="Modelo de Consultoria", icon="📔")]
+})
+pg.run()
