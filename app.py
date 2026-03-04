@@ -78,7 +78,7 @@ def pagina_analise_360():
 
     st.divider()
 
-    # --- ETAPA 1: KIBBE (O BRINDE) ---
+    # --- ETAPA 1: KIBBE (O BRINDE - VISÍVEL) ---
     st.markdown("### 👗 ETAPA 1: GEOMETRIA CORPORAL (BRINDE)")
     c1, c2 = st.columns(2)
     with c1:
@@ -104,7 +104,7 @@ def pagina_analise_360():
 
     st.divider()
 
-    # --- ETAPA 2: ESSÊNCIAS (INTERNO) ---
+    # --- ETAPA 2: ESSÊNCIAS (OCULTO - VAI PRO WHATSAPP) ---
     st.markdown("### 🎨 ETAPA 2: ANÁLISE FACIAL")
     f1 = st.selectbox("Formato do Rosto:", ["Longo", "Oval", "Quadrado", "Redondo", "Pequeno"])
     f2 = st.selectbox("Formato dos Olhos:", ["Grandes e Redondos", "Rasgados/Feline", "Amendoados", "Médios/Simétricos"])
@@ -112,33 +112,44 @@ def pagina_analise_360():
 
     st.divider()
 
-    # --- ETAPA 3: TEMPERAMENTO (INTERNO) ---
+    # --- ETAPA 3: TEMPERAMENTO (OCULTO - VAI PRO WHATSAPP) ---
     st.markdown("### 🧠 ETAPA 3: TEMPERAMENTO")
-    t1 = st.radio("Comportamento em locais novos:", ["A) Extrovertida/Interajo", "B) Introvertida/Observo"])
-    t2 = st.radio("Decisões são mais:", ["A) Racionais", "B) Emocionais"])
-    t3 = st.radio("Reação a imprevistos:", ["A) Rápida", "B) Lenta/Criteriosa"])
-    t4 = st.radio("Duração dos sentimentos:", ["A) Curta", "B) Longa/Intensa"])
+    st.write("Responda com sinceridade para o cálculo do seu perfil comportamental:")
+    t1 = st.radio("1. Em lugares novos:", ["A) Sinto-me à vontade/Interajo", "B) Sou observadora/Analiso"])
+    t2 = st.radio("2. Suas decisões são mais:", ["A) Racionais/Lógicas", "B) Emocionais/Sentimentais"])
+    t3 = st.radio("3. Reação a imprevistos:", ["A) Rápida e Imediata", "B) Lenta e Criteriosa"])
+    t4 = st.radio("4. Duração dos sentimentos:", ["A) Curta (esqueço rápido)", "B) Longa (guardo/intensifico)"])
 
-    temp_res = ""
-    if "A)" in t1 and "A)" in t2: temp_res = "COLÉRICO"
-    elif "A)" in t1 and "B)" in t2: temp_res = "SANGUÍNEO"
-    elif "B)" in t1 and "A)" in t2: temp_res = "MELANCÓLICO"
-    elif "B)" in t1 and "B)" in t2: temp_res = "FLEUMÁTICO"
+    # Lógica interna do Temperamento
+    temp_veredito = ""
+    if "A)" in t1 and "A)" in t2: temp_veredito = "COLÉRICO"
+    elif "A)" in t1 and "B)" in t2: temp_veredito = "SANGUÍNEO"
+    elif "B)" in t1 and "A)" in t2: temp_veredito = "MELANCÓLICO"
+    elif "B)" in t1 and "B)" in t2: temp_veredito = "FLEUMÁTICO"
 
     if st.button("SOLICITAR DOSSIÊ COMPLETO"):
         if not nome or not email:
-            st.error("Por favor, preencha nome e e-mail.")
+            st.error("Por favor, preencha seu nome e e-mail para continuar.")
         else:
+            # Montagem do Relatório para o seu WhatsApp
             relatorio = (
-                f"*NOVA SOLICITAÇÃO DE DOSSIÊ*%0A"
-                f"*Nome:* {nome}%0A"
-                f"*Kibbe:* {kibbe_res}%0A"
-                f"*Rosto:* {f1}%0A"
-                f"*Olhos:* {f2}%0A"
-                f"*Boca:* {f3}%0A"
-                f"*Temperamento:* {temp_res}"
+                f"*NOVA SOLICITAÇÃO DE DOSSIÊ COMPLETO*%0A"
+                f"------------------------------------%0A"
+                f"*NOME:* {nome}%0A"
+                f"*E-MAIL:* {email}%0A"
+                f"*ALTURA:* {altura}%0A"
+                f"------------------------------------%0A"
+                f"*1. KIBBE REVELADO:* {kibbe_res}%0A"
+                f"------------------------------------%0A"
+                f"*2. ESSÊNCIAS FACIAIS:*%0A"
+                f"- Rosto: {f1}%0A"
+                f"- Olhos: {f2}%0A"
+                f"- Boca: {f3}%0A"
+                f"------------------------------------%0A"
+                f"*3. TEMPERAMENTO CALCULADO:* {temp_veredito}%0A"
+                f"(Respostas: {t1[0]}, {t2[0]}, {t3[0]}, {t4[0]})"
             )
-            st.success("Dados processados com sucesso!")
+            st.success("Análise processada! Clique no botão dourado para me enviar os dados e agendar sua consultoria.")
             st.link_button("👑 ENVIAR PARA JÉSSICA MARIA", f"https://wa.me/5515996398197?text={relatorio}")
 
 def pagina_modelo():
