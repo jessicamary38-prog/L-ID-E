@@ -53,19 +53,18 @@ def pagina_journal():
         st.image("banner.png")
     
     st.markdown("""
-    Na Maison L'Idée, não seguimos regras rígidas. Nosso método une a precisão técnica ao bem-estar e à **Bioestética**.
+    Na Maison L'Idée, o método une a precisão técnica ao bem-estar e à **Bioestética**.
     """)
     with st.expander("👗 Geometria Corporal (Kibbe)", expanded=True):
-        st.write("Estudo da estrutura óssea e muscular para que as roupas moldem sua moldura física com harmonia e respeito às suas linhas naturais.")
+        st.write("Estudo da estrutura óssea e muscular para que as roupas moldem sua moldura física com harmonia.")
     
     with st.expander("🎨 Essências de Estilo (Kitchener)", expanded=True):
-        st.write("Análise da mensagem que seu rosto e sua presença transmitem ao mundo através da geometria facial e traços expressivos.")
+        st.write("Análise da mensagem que seu rosto e sua presença transmitem ao mundo através da geometria facial.")
     
     with st.expander("🧠 Temperamento e Comportamento", expanded=True):
         st.write("""
-        **O pilar invisível da sua imagem.** Investigamos como o seu sistema nervoso reage ao mundo (Neurociência). 
-        O temperamento define se sua energia é de execução, comunicação, análise ou estabilidade. 
-        Alinhar sua estética ao seu comportamento garante que você não apenas pareça confiante, mas que se sinta em casa na própria pele.
+        **O pilar invisível da sua imagem.** Investigamos como o seu sistema nervoso reage ao mundo. 
+        O temperamento define sua energia e comportamento, garantindo que sua imagem seja uma extensão real de quem você é.
         """)
 
 def pagina_analise_360():
@@ -73,83 +72,70 @@ def pagina_analise_360():
     st.info("A Etapa 1 é um presente da Maison. As demais compõem seu Dossiê Premium.")
 
     nome = st.text_input("Nome da Cliente:").strip()
-    email = st.text_input("E-mail:")
-    altura = st.number_input("Altura (ex: 1.60):", min_value=1.0, value=1.60, step=0.01)
+    email = st.text_input("Seu melhor E-mail:")
+    altura = st.number_input("Sua Altura (ex: 1.60):", min_value=1.0, value=1.60, step=0.01)
 
     st.divider()
 
-    # --- ETAPA 1: KIBBE (O BRINDE - VISÍVEL) ---
-    st.markdown("### 👗 ETAPA 1: GEOMETRIA CORPORAL (BRINDE)")
-    c1, c2 = st.columns(2)
-    with c1:
-        p1 = st.radio("1. Estrutura Óssea:", ["A) Estreita", "B) Larga", "C) Simétrica"])
-        curva = st.radio("2. Presença de Curvas nítidas?", ["S", "N"])
-    with c2:
-        carne = st.radio("3. Textura da Carne:", ["A) Densa/Firme", "B) Macia/Suave"])
-
-    kibbe_res = ""
-    if altura <= 1.63:
-        if curva == "S": kibbe_res = "SOFT GAMINE" if "A)" in carne else "FAMÍLIA ROMÂNTICA"
-        else: kibbe_res = "FLAMBOYANT GAMINE" if "A)" in carne else "GAMINE MISTO"
-    elif altura >= 1.70:
-        if curva == "S": kibbe_res = "SOFT DRAMATIC"
-        elif "B)" in p1: kibbe_res = "FLAMBOYANT NATURAL"
-        else: kibbe_res = "DRAMATIC"
-    else:
-        if curva == "S": kibbe_res = "SOFT NATURAL" if "B)" in p1 else "SOFT CLASSIC"
-        else: kibbe_res = "NATURAL PURE" if "B)" in p1 else "CLASSIC / DRAMATIC CLASSIC"
-
-    if st.button("REVELAR MEU KIBBE (CORTESIA)"):
-        st.success(f"Seu resultado preliminar é: **{kibbe_res}**")
-
-    st.divider()
-
-    # --- ETAPA 2: ESSÊNCIAS (OCULTO - VAI PRO WHATSAPP) ---
-    st.markdown("### 🎨 ETAPA 2: ANÁLISE FACIAL")
-    f1 = st.selectbox("Formato do Rosto:", ["Longo", "Oval", "Quadrado", "Redondo", "Pequeno"])
-    f2 = st.selectbox("Formato dos Olhos:", ["Grandes e Redondos", "Rasgados/Feline", "Amendoados", "Médios/Simétricos"])
-    f3 = st.selectbox("Formato da Boca:", ["Carnuda", "Larga", "Pequena", "Fina"])
-
-    st.divider()
-
-    # --- ETAPA 3: TEMPERAMENTO (OCULTO - VAI PRO WHATSAPP) ---
-    st.markdown("### 🧠 ETAPA 3: TEMPERAMENTO")
-    st.write("Responda com sinceridade para o cálculo do seu perfil comportamental:")
+    # --- ETAPA 1: TEMPERAMENTO (O NOVO BRINDE) ---
+    st.markdown("### 🧠 ETAPA 1: TEMPERAMENTO (BRINDE)")
+    st.write("Descubra o seu perfil comportamental predominante:")
     t1 = st.radio("1. Em lugares novos:", ["A) Sinto-me à vontade/Interajo", "B) Sou observadora/Analiso"])
     t2 = st.radio("2. Suas decisões são mais:", ["A) Racionais/Lógicas", "B) Emocionais/Sentimentais"])
     t3 = st.radio("3. Reação a imprevistos:", ["A) Rápida e Imediata", "B) Lenta e Criteriosa"])
     t4 = st.radio("4. Duração dos sentimentos:", ["A) Curta (esqueço rápido)", "B) Longa (guardo/intensifico)"])
 
-    # Lógica interna do Temperamento
     temp_veredito = ""
     if "A)" in t1 and "A)" in t2: temp_veredito = "COLÉRICO"
     elif "A)" in t1 and "B)" in t2: temp_veredito = "SANGUÍNEO"
     elif "B)" in t1 and "A)" in t2: temp_veredito = "MELANCÓLICO"
     elif "B)" in t1 and "B)" in t2: temp_veredito = "FLEUMÁTICO"
 
+    if st.button("REVELAR MEU TEMPERAMENTO (CORTESIA)"):
+        st.success(f"Seu temperamento predominante é: **{temp_veredito}**")
+
+    st.divider()
+
+    # --- ETAPA 2: KIBBE (OCULTO) ---
+    st.markdown("### 👗 ETAPA 2: GEOMETRIA CORPORAL")
+    c1, c2 = st.columns(2)
+    with c1:
+        k_osseo = st.radio("Estrutura Óssea:", ["A) Estreita", "B) Larga", "C) Simétrica"])
+        k_curva = st.radio("Curvas nítidas?", ["Sim", "Não"])
+    with c2:
+        k_carne = st.radio("Textura da Carne:", ["A) Densa/Firme", "B) Macia/Suave"])
+
+    st.divider()
+
+    # --- ETAPA 3: ESSÊNCIAS (OCULTO) ---
+    st.markdown("### 🎨 ETAPA 3: ANÁLISE FACIAL")
+    f1 = st.selectbox("Formato do Rosto:", ["Longo", "Oval", "Quadrado", "Redondo", "Pequeno"])
+    f2 = st.selectbox("Formato dos Olhos:", ["Grandes e Redondos", "Rasgados/Feline", "Amendoados", "Médios/Simétricos"])
+    f3 = st.selectbox("Formato da Boca:", ["Carnuda", "Larga", "Pequena", "Fina"])
+
     if st.button("SOLICITAR DOSSIÊ COMPLETO"):
         if not nome or not email:
-            st.error("Por favor, preencha seu nome e e-mail para continuar.")
+            st.error("Por favor, preencha nome e e-mail.")
         else:
-            # Montagem do Relatório para o seu WhatsApp
             relatorio = (
-                f"*NOVA SOLICITAÇÃO DE DOSSIÊ COMPLETO*%0A"
+                f"*SOLICITAÇÃO DE DOSSIÊ COMPLETO*%0A"
                 f"------------------------------------%0A"
-                f"*NOME:* {nome}%0A"
-                f"*E-MAIL:* {email}%0A"
+                f"*CLIENTE:* {nome}%0A"
                 f"*ALTURA:* {altura}%0A"
                 f"------------------------------------%0A"
-                f"*1. KIBBE REVELADO:* {kibbe_res}%0A"
+                f"*1. TEMPERAMENTO (Revelado):* {temp_veredito}%0A"
                 f"------------------------------------%0A"
-                f"*2. ESSÊNCIAS FACIAIS:*%0A"
+                f"*2. DADOS KIBBE (Para calcular):*%0A"
+                f"- Ósseo: {k_osseo}%0A"
+                f"- Curvas: {k_curva}%0A"
+                f"- Carne: {k_carne}%0A"
+                f"------------------------------------%0A"
+                f"*3. DADOS FACIAIS:*%0A"
                 f"- Rosto: {f1}%0A"
                 f"- Olhos: {f2}%0A"
                 f"- Boca: {f3}%0A"
-                f"------------------------------------%0A"
-                f"*3. TEMPERAMENTO CALCULADO:* {temp_veredito}%0A"
-                f"(Respostas: {t1[0]}, {t2[0]}, {t3[0]}, {t4[0]})"
             )
-            st.success("Análise processada! Clique no botão dourado para me enviar os dados e agendar sua consultoria.")
+            st.success("Tudo pronto! Clique abaixo para me enviar os dados.")
             st.link_button("👑 ENVIAR PARA JÉSSICA MARIA", f"https://wa.me/5515996398197?text={relatorio}")
 
 def pagina_modelo():
