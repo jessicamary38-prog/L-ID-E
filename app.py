@@ -32,7 +32,7 @@ def pagina_inicio():
     st.divider()
     col1, col2 = st.columns([1, 2])
     with col1:
-        # Atualizado para .png conforme solicitado
+        # AJUSTE AQUI: O código agora procura por 'perfil.png'
         if os.path.exists("perfil.png"): 
             st.image("perfil.png", caption="Jéssica Maria")
         st.markdown("### Conecte-se")
@@ -40,118 +40,116 @@ def pagina_inicio():
         st.link_button("📌 PINTEREST", "https://www.pinterest.com/jessicamary38")
     with col2:
         st.markdown("""
-        ### O Olhar por trás da Maison
+        ### Quem Sou Eu
         Integro corpo, face e essência através da neurociência e do comportamento humano. 
         Dessa investigação nasceu o meu método exclusivo: a **humanidade sistêmica**.
-        
-        Acredito que a imagem não é apenas estética, mas uma ferramenta poderosa de comunicação da sua alma e temperamento.
         
         **Prazer, Jéssica Maria.**
         """)
 
 def pagina_journal():
     st.title("📖 O Método Maison L'Idée")
-    st.subheader("Uma Visão Sistêmica da Imagem")
+    st.subheader("Journal: Visão Sistêmica")
     if os.path.exists("banner.png"):
-        st.image("banner.png", caption="Curadoria Maison L'Idée")
+        st.image("banner.png")
     
     st.markdown("""
-    Na Maison L'Idée, não seguimos regras rígidas. Nosso método une a precisão técnica da geometria corporal ao equilíbrio do sistema nervoso.
+    Na Maison L'Idée, o método une a precisão técnica ao bem-estar e à **Bioestética**.
     """)
     with st.expander("👗 Geometria Corporal (Kibbe)", expanded=True):
         st.write("Estudo da estrutura óssea e muscular para que as roupas moldem sua moldura física com harmonia.")
+    
     with st.expander("🎨 Essências de Estilo (Kitchener)", expanded=True):
         st.write("Análise da mensagem que seu rosto e sua presença transmitem ao mundo através da geometria facial.")
+    
     with st.expander("🧠 Temperamento e Comportamento", expanded=True):
-        st.write("Alinhamento da imagem ao seu sistema nervoso, garantindo que sua beleza seja sentida com confiança e autenticidade.")
+        st.write("""
+        **O pilar invisível da sua imagem.** Investigamos como o seu sistema nervoso reage ao mundo. 
+        O temperamento define sua energia e comportamento, garantindo que sua imagem seja uma extensão real de quem você é.
+        """)
 
 def pagina_analise_360():
     st.title("📏 Triagem Sistêmica 360º")
-    st.info("Preencha as etapas abaixo. A Etapa 1 é uma cortesia; as demais me ajudam a preparar nossa conversa.")
+    st.info("A Etapa 1 é um presente da Maison. As demais compõem seu Dossiê Premium.")
 
     nome = st.text_input("Nome da Cliente:").strip()
     email = st.text_input("Seu melhor E-mail:")
-    altura = st.number_input("Altura (ex: 1.52):", min_value=1.0, value=1.60, step=0.01)
+    altura = st.number_input("Sua Altura (ex: 1.60):", min_value=1.0, value=1.60, step=0.01)
 
     st.divider()
 
-    # --- ETAPA 1: KIBBE ---
-    st.markdown("### 👗 ETAPA 1: GEOMETRIA CORPORAL (KIBBE)")
+    # --- ETAPA 1: TEMPERAMENTO (O BRINDE) ---
+    st.markdown("### 🧠 ETAPA 1: TEMPERAMENTO (BRINDE)")
+    st.write("Descubra o seu perfil comportamental predominante:")
+    t1 = st.radio("1. Em lugares novos:", ["A) Sinto-me à vontade/Interajo", "B) Sou observadora/Analiso"])
+    t2 = st.radio("2. Suas decisões são mais:", ["A) Racionais/Lógicas", "B) Emocionais/Sentimentais"])
+    t3 = st.radio("3. Reação a imprevistos:", ["A) Rápida e Imediata", "B) Lenta e Criteriosa"])
+    t4 = st.radio("4. Duração dos sentimentos:", ["A) Curta (esqueço rápido)", "B) Longa (guardo/intensifico)"])
+
+    temp_veredito = ""
+    if "A)" in t1 and "A)" in t2: temp_veredito = "COLÉRICO"
+    elif "A)" in t1 and "B)" in t2: temp_veredito = "SANGUÍNEO"
+    elif "B)" in t1 and "A)" in t2: temp_veredito = "MELANCÓLICO"
+    elif "B)" in t1 and "B)" in t2: temp_veredito = "FLEUMÁTICO"
+
+    if st.button("REVELAR MEU TEMPERAMENTO (CORTESIA)"):
+        st.success(f"Seu temperamento predominante é: **{temp_veredito}**")
+
+    st.divider()
+
+    # --- ETAPA 2: KIBBE (OCULTO) ---
+    st.markdown("### 👗 ETAPA 2: GEOMETRIA CORPORAL")
     c1, c2 = st.columns(2)
     with c1:
-        p1 = st.radio("1. Estrutura Óssea:", ["A) Estreita", "B) Larga", "C) Simétrica"])
-        curva = st.radio("2. Presença de Curvas nítidas?", ["S", "N"])
+        k_osseo = st.radio("Estrutura Óssea:", ["A) Estreita", "B) Larga", "C) Simétrica"])
+        k_curva = st.radio("Curvas nítidas?", ["Sim", "Não"])
     with c2:
-        carne = st.radio("3. Textura da Carne:", ["A) Densa/Firme", "B) Macia/Suave"])
-
-    kibbe_res = ""
-    if altura <= 1.63:
-        if curva == "S": kibbe_res = "SOFT GAMINE" if "A)" in carne else "FAMÍLIA ROMÂNTICA"
-        else: kibbe_res = "FLAMBOYANT GAMINE" if "A)" in carne else "GAMINE MISTO"
-    elif altura >= 1.70:
-        if curva == "S": kibbe_res = "SOFT DRAMATIC"
-        elif "B)" in p1: kibbe_res = "FLAMBOYANT NATURAL"
-        else: kibbe_res = "DRAMATIC"
-    else:
-        if curva == "S": kibbe_res = "SOFT NATURAL" if "B)" in p1 else "SOFT CLASSIC"
-        else: kibbe_res = "NATURAL PURE" if "B)" in p1 else "CLASSIC / DRAMATIC CLASSIC"
-
-    if st.button("REVELAR MEU KIBBE (CORTESIA)"):
-        st.success(f"Sua base corporal preliminar é: **{kibbe_res}**")
+        k_carne = st.radio("Textura da Carne:", ["A) Densa/Firme", "B) Macia/Suave"])
 
     st.divider()
 
-    # --- ETAPA 2: ESSÊNCIAS ---
-    st.markdown("### 🎨 ETAPA 2: ESSÊNCIAS FACIAIS")
-    pts = {"Dramatic": 0, "Natural": 0, "Classic": 0, "Romantic": 0, "Gamine": 0, "Ingenue": 0}
-    r1 = st.selectbox("1. Formato do Rosto:", ["Longo", "Oval", "Quadrado", "Redondo", "Pequeno"])
-    if r1 == "Longo": pts["Dramatic"] += 40
-    elif r1 == "Oval": pts["Classic"] += 40
-    elif r1 == "Quadrado": pts["Natural"] += 40
-    elif r1 == "Redondo": pts["Ingenue"] += 20; pts["Romantic"] += 20
-    elif r1 == "Pequeno": pts["Gamine"] += 40
+    # --- ETAPA 3: ESSÊNCIAS (OCULTO) ---
+    st.markdown("### 🎨 ETAPA 3: ANÁLISE FACIAL")
+    f1 = st.selectbox("Formato do Rosto:", ["Longo", "Oval", "Quadrado", "Redondo", "Pequeno"])
+    f2 = st.selectbox("Formato dos Olhos:", ["Grandes e Redondos", "Rasgados/Feline", "Amendoados", "Médios/Simétricos"])
+    f3 = st.selectbox("Formato da Boca:", ["Carnuda", "Larga", "Pequena", "Fina"])
 
-    r2 = st.selectbox("2. Formato da Boca:", ["Carnuda/Arredondada", "Larga/Aberta", "Pequena", "Fina"])
-    if r2 == "Carnuda/Arredondada": pts["Romantic"] += 30
-    elif r2 == "Larga/Aberta": pts["Natural"] += 30
-    elif r2 == "Pequena": pts["Ingenue"] += 30
-    elif r2 == "Fina": pts["Dramatic"] += 15; pts["Gamine"] += 15
-
-    r3 = st.selectbox("3. Formato dos Olhos:", ["Grandes e Redondos", "Rasgados/Feline", "Amendoados", "Médios/Simétricos"])
-    if r3 == "Grandes e Redondos": pts["Ingenue"] += 10
-    elif r3 == "Rasgados/Feline": pts["Gamine"] += 10; pts["Dramatic"] += 5
-    elif r3 == "Amendoados": pts["Romantic"] += 10
-    elif r3 == "Médios/Simétricos": pts["Classic"] += 10
-
-    st.divider()
-
-    # --- ETAPA 3: TEMPERAMENTO ---
-    st.markdown("### 🧠 ETAPA 3: TEMPERAMENTO")
-    e1 = st.radio("1. Energia:", ["A) Extrovertida", "B) Introvertida"])
-    e2 = st.radio("2. Julgamento:", ["A) Racional", "B) Emocional"])
-    e3 = st.radio("3. Reação:", ["A) Rápida/Imediata", "B) Lenta/Criteriosa"])
-    e4 = st.radio("4. Duração do Impacto:", ["A) Curta", "B) Longa"])
-
-    # Lógica de Veredito
-    temp_veredito = ""
-    if "A)" in e1 and "A)" in e2: temp_veredito = "COLÉRICO"
-    elif "A)" in e1 and "B)" in e2: temp_veredito = "SANGUÍNEO"
-    elif "B)" in e1 and "A)" in e2: temp_veredito = "MELANCÓLICO"
-    elif "B)" in e1 and "B)" in e2: temp_veredito = "FLEUMÁTICO"
-
-    if st.button("SOLICITAR MINHA ANÁLISE COMPLETA"):
+    if st.button("SOLICITAR DOSSIÊ COMPLETO"):
         if not nome or not email:
             st.error("Por favor, preencha nome e e-mail.")
         else:
-            relatorio = f"TRIAGEM 360 - MAISON: {nome} | Email: {email} | Kibbe: {kibbe_res} | Olhos: {r3} | Temperamento: {temp_veredito} ({e1[0]}{e2[0]}{e3[0]}{e4[0]}) | Scores: {pts}"
-            st.success("Tudo pronto! Vamos iniciar sua jornada sistêmica?")
-            link_whats = f"https://wa.me/5515996398197?text={relatorio.replace(' ', '%20')}"
-            st.link_button("👑 INICIAR MINHA JORNADA SISTÊMICA", link_whats)
+            relatorio = (
+                f"*SOLICITAÇÃO DE DOSSIÊ COMPLETO*%0A"
+                f"------------------------------------%0A"
+                f"*CLIENTE:* {nome}%0A"
+                f"*ALTURA:* {altura}%0A"
+                f"------------------------------------%0A"
+                f"*1. TEMPERAMENTO (Revelado):* {temp_veredito}%0A"
+                f"------------------------------------%0A"
+                f"*2. DADOS KIBBE (Para calcular):*%0A"
+                f"- Ósseo: {k_osseo}%0A"
+                f"- Curvas: {k_curva}%0A"
+                f"- Carne: {k_carne}%0A"
+                f"------------------------------------%0A"
+                f"*3. DADOS FACIAIS:*%0A"
+                f"- Rosto: {f1}%0A"
+                f"- Olhos: {f2}%0A"
+                f"- Boca: {f3}%0A"
+            )
+            st.success("Tudo pronto! Clique abaixo para me enviar os dados.")
+            st.link_button("👑 ENVIAR PARA JÉSSICA MARIA", f"https://wa.me/5515996398197?text={relatorio}")
+
+def pagina_modelo():
+    st.title("📔 Modelo de Consultoria")
+    st.markdown("### Veja como será seu Dossiê")
+    st.write("Explore um exemplo real da entrega final da Maison L'Idée.")
+    st.link_button("🔗 VER MODELO DE DOSSIÊ COMPLETO", "https://www.notion.so/Dossi-J-ssica-Maria-317f44f5bd8680c3b6a9e0ea0243822d")
 
 # --- 3. NAVEGAÇÃO ---
 pg = st.navigation({
-    "Maison": [st.Page(pagina_inicio, title="Início", icon="🏠")],
+    "Maison": [st.Page(pagina_inicio, title="Quem Sou Eu", icon="🏠")],
     "Método": [st.Page(pagina_journal, title="Journal", icon="📖")],
-    "Análise": [st.Page(pagina_analise_360, title="Triagem 360º", icon="📏")]
+    "Análise": [st.Page(pagina_analise_360, title="Triagem 360º", icon="📏")],
+    "Exemplo": [st.Page(pagina_modelo, title="Modelo de Consultoria", icon="📔")]
 })
 pg.run()
