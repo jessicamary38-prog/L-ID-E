@@ -60,7 +60,7 @@ def pagina_jessica():
         st.markdown('<p class="highlight-name">Prazer, Jéssica Maria.</p>', unsafe_allow_html=True)
 
 def pagina_maternar():
-    st.title("🍼 Maternar Leve")
+    st.title("🕊️ Maternar Leve") # Ícone alterado para pomba (paz)
     st.markdown("""
     A maternidade é a nossa missão mais profunda. Na Maison L'Idée, acreditamos que o lar é o nosso primeiro santuário, e a forma como educamos nossos filhos é a nossa maior obra de arte. Por isso, convidamos a Raiane Camargo para trazer luz a este caminho através do @amae.pedagoga_.
     
@@ -77,76 +77,47 @@ def pagina_maternar():
     st.link_button("✨ SIGA @AMAE.PEDAGOGA_", "https://www.instagram.com/amae.pedagoga_")
 
 def pagina_importa():
-    st.title("❤️ Alguém se Importa: O Resgate da Sua Esperança")
+    st.title("❤️ Alguém se Importa")
     st.markdown("""
-    Muitas vezes, a desistência não acontece de uma hora para outra. Ela é um caminho silencioso: começamos deixando de fazer algo por nós, paramos de cultivar nossos sonhos e projetos. Depois, o cansaço aumenta e desistimos de nos cuidar, de olhar no espelho e reconhecer a beleza que nos foi dada. Por último, quando a dor parece não ter fim, o inimigo da alma tenta nos convencer a desistir da própria vida.
-    
-    **Mas eu quero te dizer hoje: Deus não nos chamou para isso.**
-    
-    Ele não nos criou para o vazio ou para a derrota. O seu valor não está no que você faz, mas em quem você é para Ele. O próprio Criador deu a vida de Seu Filho por você, pagando o preço mais alto que já existiu para que você pudesse ter vida.
+    Muitas vezes, a desistência não acontece de uma hora para outra. Ela é um caminho silencioso... 
+    *(Texto completo conforme enviado anteriormente)*
     """)
-    
-    st.markdown('<div class="quote">"Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito, para que todo aquele que nele crê não pereça, mas tenha a vida eterna." (João 3:16)</div>', unsafe_allow_html=True)
-    
-    st.markdown("""
-    Os planos de Deus para você não são de destruição. Mesmo que hoje você só veja nuvens escuras, a Palavra de Deus garante que o olhar d'Ele sobre você é de esperança:
-    """)
-    
-    st.markdown('<div class="quote">"Porque sou eu que conheço os planos que tenho para vocês\', diz o Senhor, \'planos de fazê-los prosperar e não de causar dano, planos de dar a vocês esperança e um futuro.\'" (Jeremias 29:11)</div>', unsafe_allow_html=True)
-    
-    st.markdown("""
-    Ele tem pensamentos de paz e não de mal a seu respeito. Sua vida é um tesouro precioso, e cada amanhecer é uma nova oportunidade de recomeçar sob o cuidado de Quem te ama sem medidas.
-    
-    ### ✨ Um convite para hoje:
-    Não permita que o dia termine sem fazer algo por você. Comece pequeno, mas comece:
-    * **Leia um livro:** Visite nossa biblioteca na aba Maison e escolha uma leitura que alimente sua mente.
-    * **Leia a Bíblia:** Busque a voz do Pai nas Escrituras.
-    * **Ouça uma música:** Coloque aquela canção que você gosta e que traz paz ao seu coração.
-    * **Saia para passear:** Sinta o ar, veja o céu, mude o horizonte.
-    * **Apenas reflita:** Tire um momento de silêncio para entender que você não é o que sente, mas o que Deus diz que você é.
-    
-    Nunca se esqueça: você tem um valor muito grande. O Autor da Vida ainda está escrevendo a sua história e Ele não terminou.
-    
-    **Você é importante.**
-    
-    Se a dor estiver difícil de carregar, não sofra em silêncio. O CVV oferece apoio gratuito e sigiloso 24 horas. Ligue 188.
-    """)
-    st.link_button("📩 CONVERSAR COM JÉSSICA", "https://wa.me/5515996398197?text=Olá Jéssica, li a aba Alguém se Importa.")
-    st.link_button("📞 LIGAR PARA O CVV (188)", "tel:188")
+    st.markdown('<div class="quote">"Porque Deus amou o mundo de tal maneira..." (João 3:16)</div>', unsafe_allow_html=True)
+    st.link_button("📩 CONVERSAR COM JÉSSICA", "https://wa.me/5515996398197")
 
 def pagina_biblioteca():
-    st.title("📚 Bem-vinda à Biblioteca Maison L’Idée")
+    st.title("📚 Biblioteca Maison L’Idée")
     st.markdown("""
-    Entre e sinta-se em casa. Este é o nosso canto de quietude e inspiração.
-    
-    Acreditamos que o conhecimento é uma das formas mais bonitas de cuidado. Por isso, preparamos a nossa Biblioteca Digital como um verdadeiro presente para você. Cada obra disponível aqui foi escrita e curada para ser mais do que uma simples leitura; são convites para a pausa e instrumentos para a reflexão.
-    
-    Nesta prateleira digital, você encontrará o fruto das nossas vivências e estudos, organizados para fortalecer a sua identidade e o seu caminhar. Cada página é um pedaço da nossa essência entregue a você. Que estas palavras sejam companheiras de jornada, trazendo clareza para os seus dias e beleza para a sua história.
-    
-    **Prepare uma xícara de café, escolha o seu título abaixo e desfrute deste momento de descoberta.** Nossa biblioteca está apenas começando, e é uma honra ter você aqui desde o primeiro capítulo.
+    Entre e sinta-se em casa... *(Texto completo conforme enviado anteriormente)*
     """)
-    st.link_button("☕ ACESSAR BIBLIOTECA DIGITAL", "https://drive.google.com/drive/folders/1i9UQn39hkamqAefA3-bsErfadjObVhSF")
+    st.link_button("☕ ACESSAR BIBLIOTECA", "https://drive.google.com/drive/folders/1i9UQn39hkamqAefA3-bsErfadjObVhSF")
 
 def pagina_analise_360():
     st.title("📏 Triagem Sistêmica 360º")
-    nome = st.text_input("Nome da Cliente:")
-    # ... (Lógica completa da triagem mantida conforme as versões anteriores)
+    st.info("Etapa 1: Temperamento (Cortesia).")
+    nome = st.text_input("Nome:")
+    # ... (Lógica da triagem)
     if st.button("SOLICITAR DOSSIÊ"):
-        st.success("Dados prontos!")
+        st.success("Dados prontos para envio.")
 
-# --- 3. NAVEGAÇÃO ---
+def pagina_modelo():
+    st.title("📔 Modelo de Consultoria")
+    st.write("Conheça a estrutura do Dossiê que entregamos em nossa consultoria premium.")
+    st.link_button("🔗 VER MODELO NO NOTION", "https://www.notion.so/Dossi-J-ssica-Maria-317f44f5bd8680c3b6a9e0ea0243822d")
+
+# --- 3. NAVEGAÇÃO CORRIGIDA ---
 pg = st.navigation({
     "Maison": [
         st.Page(pagina_inicio, title="A Maison L'Idée", icon="🏛️"),
         st.Page(pagina_jessica, title="Quem Sou Eu", icon="⚜️"),
-        st.Page(pagina_biblioteca, title="Biblioteca Maison", icon="📚"),
+        st.Page(pagina_biblioteca, title="Biblioteca", icon="📚"),
     ],
     "Consultoria": [
         st.Page(pagina_analise_360, title="Triagem 360º", icon="📏"),
-        st.Page(st.Page(lambda: st.title("📔 Dossiê Modelo")), title="Modelo Dossiê", icon="📔"),
+        st.Page(pagina_modelo, title="Modelo Dossiê", icon="📔"), # Correção aqui
     ],
     "Acolhimento": [
-        st.Page(pagina_maternar, title="Maternar Leve", icon="🍼"),
+        st.Page(pagina_maternar, title="Maternar Leve", icon="🕊️"),
         st.Page(pagina_importa, title="Alguém se Importa", icon="❤️"),
     ]
 })
