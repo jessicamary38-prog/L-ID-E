@@ -47,7 +47,7 @@ def pagina_inicio():
     
     * **Consultoria & Estilo:** Estratégias visuais que honram a sua história e o seu guarda-roupa.
     * **Biblioteca Digital:** Ebooks que alimentam a mente e o espírito.
-    * **Maternar Leve (@maepedagoga):** Um espaço sagrado de educação e afeto para mães que desejam uma jornada com propósito.
+    * **Maternar Leve (@amae.pedagoga_):** Um espaço sagrado de educação e afeto para mães que desejam uma jornada com propósito.
     * **Alguém se Importa?:** O nosso braço de acolhimento e valorização da vida, lembrando a cada instante que você é um tesouro precioso do Criador.
     
     ### ⚜️ Nossa Missão
