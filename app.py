@@ -41,19 +41,6 @@ def pagina_inicio():
     * **O Temperamento:** A força da sua alma e o seu ritmo interno.
     * **A Geometria (Kibbe):** O respeito às linhas e formas do seu projeto original.
     * **A Essência (Kitchener):** O perfume e a mensagem que o seu rosto emana.
-    
-    ### 🕊️ Um Ecossistema de Cuidado
-    A Maison L’Idée cresceu e hoje é um lar que abriga todas as fases da vida. Entendemos que cuidar da imagem é apenas o começo de uma jornada de autogoverno e amor ao próximo. Por isso, nossa casa se expandiu em novas frentes:
-    
-    * **Consultoria & Estilo:** Estratégias visuais que honram a sua história e o seu guarda-roupa.
-    * **Biblioteca Digital:** Ebooks que alimentam a mente e o espírito.
-    * **Maternar Leve (@amae.pedagoga_):** Um espaço sagrado de educação e afeto para mães que desejam uma jornada com propósito.
-    * **Alguém se Importa?:** O nosso braço de acolhimento e valorização da vida, lembrando a cada instante que você é um tesouro precioso do Criador.
-    
-    ### ⚜️ Nossa Missão
-    Ajudar você a se vestir de si mesma. Sem fantasias, sem mudanças radicais que anulem sua essência, e com o respeito profundo à sua individualidade.
-    
-    Seja bem-vinda à Maison L’Idée. Aqui, sua vida tem um valor inestimável e sua beleza tem um lugar para florescer.
     """)
 
 def pagina_jessica():
@@ -91,7 +78,7 @@ def pagina_maternar():
     st.link_button("✨ SIGA @AMAE.PEDAGOGA_", "https://www.instagram.com/amae.pedagoga_")
 
 def pagina_importa():
-    st.title("❤️ Alguém se Importa")
+    st.title("❤️ Alguém se Importa: O Resgate da Sua Esperança")
     st.markdown("""
     Muitas vezes, a desistência não acontece de uma hora para outra. Ela é um caminho silencioso: começamos deixando de fazer algo por nós, paramos de cultivar nossos sonhos e projetos. Depois, o cansaço aumenta e desistimos de nos cuidar, de olhar no espelho e reconhecer a beleza que nos foi dada. Por último, quando a dor parece não ter fim, o inimigo da alma tenta nos convencer a desistir da própria vida.
     
@@ -125,7 +112,7 @@ def pagina_importa():
     
     Se a dor estiver difícil de carregar, não sofra em silêncio. O CVV oferece apoio gratuito e sigiloso 24 horas. Ligue 188.
     """)
-    st.link_button("📩 CONVERSAR COM JÉSSICA", "https://wa.me/5515996398197?text=Olá Jéssica, li a aba Alguém se Importa.")
+    st.link_button("📸 ME CHAME NO INSTAGRAM", "https://www.instagram.com/jessicamargo.mr")
     st.link_button("📞 LIGAR PARA O CVV (188)", "tel:188")
 
 def pagina_biblioteca():
