@@ -8,7 +8,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Estilização CSS Maison
+# Estilização CSS Maison (Mantendo sua identidade visual)
 st.markdown("""
     <style>
     .main { background-color: #fcfaf7; }
@@ -29,7 +29,8 @@ st.markdown("""
 def pagina_inicio():
     st.title("🏛️ Maison L’Idée")
     st.subheader("Onde a Alma Encontra sua Imagem")
-    if os.path.exists("banner.png"): st.image("banner.png")
+    if os.path.exists("banner.png"): 
+        st.image("banner.png")
     st.markdown("""
     A Maison L’Idée (A Casa da Ideia) não é apenas um espaço de consultoria de imagem; é um refúgio dedicado à revelação da identidade. Acreditamos que a beleza não é algo que se cria do zero, mas algo que se descobre e se organiza.
     
@@ -59,6 +60,20 @@ def pagina_jessica():
         Acredito que vestir-se de si mesma é um ato de autogoverno e honra ao seu projeto original. Meu papel é ser a ponte que traduz a sua essência em uma imagem coerente e cheia de paz.
         """)
         st.markdown('<p class="highlight-name">Prazer, Jéssica Maria.</p>', unsafe_allow_html=True)
+
+def pagina_boutique():
+    st.title("🛍️ Boutique Maison L’Idée")
+    st.subheader("Sua Vitrine Exclusiva e Curada")
+    st.markdown("""
+    A **Boutique Maison L’Idée** é a extensão do nosso olhar sobre a beleza e a sofisticação. Aqui, a curadoria encontra o propósito, selecionando peças que respeitam a sua geometria e elevam a sua essência.
+    
+    ### ✨ Nossa Vitrine Online
+    Para mantermos a exclusividade e um atendimento personalizado, nossa vitrine principal acontece dentro do nosso **Grupo Vip no WhatsApp**. Lá, você terá acesso em primeira mão a lançamentos, dicas de estilo aplicadas e a curadoria direta da Jéssica Maria.
+    
+    **Toque no botão abaixo para entrar na nossa comunidade e conferir as novidades:**
+    """)
+    # Link do WhatsApp que você solicitou
+    st.link_button("💎 ACESSAR VITRINE NO WHATSAPP", "https://chat.whatsapp.com/SEU_LINK_DO_GRUPO")
 
 def pagina_maternar():
     st.title("🕊️ Maternar Leve")
@@ -96,17 +111,12 @@ def pagina_importa():
     st.markdown('<div class="quote">"Porque sou eu que conheço os planos que tenho para vocês\', diz o Senhor, \'planos de fazê-los prosperar e não de causar dano, planos de dar a vocês esperança e um futuro.\'" (Jeremias 29:11)</div>', unsafe_allow_html=True)
     
     st.markdown("""
-    Ele tem pensamentos de paz e não de mal a seu respeito. Sua vida é um tesouro precioso, e cada amanhecer é uma nova oportunidade de recomeçar sob o cuidado de Quem te ama sem medidas.
-    
     ### ✨ Um convite para hoje:
     Não permita que o dia termine sem fazer algo por você. Comece pequeno, mas comece:
     * **Leia um livro:** Visite nossa biblioteca na aba Maison e escolha uma leitura que alimente sua mente.
     * **Leia a Bíblia:** Busque a voz do Pai nas Escrituras.
     * **Ouça uma música:** Coloque aquela canção que você gosta e que traz paz ao seu coração.
     * **Saia para passear:** Sinta o ar, veja o céu, mude o horizonte.
-    * **Apenas reflita:** Tire um momento de silêncio para entender que você não é o que sente, mas o que Deus diz que você é.
-    
-    Nunca se esqueça: você tem um valor muito grande. O Autor da Vida ainda está escrevendo a sua história e Ele não terminou.
     
     **Você é importante.**
     
@@ -121,10 +131,6 @@ def pagina_biblioteca():
     Entre e sinta-se em casa. Este é o nosso canto de quietude e inspiração.
     
     Acreditamos que o conhecimento é uma das formas mais bonitas de cuidado. Por isso, preparamos a nossa Biblioteca Digital como um verdadeiro presente para você. Cada obra disponível aqui foi escrita e curada para ser mais do que uma simples leitura; são convites para a pausa e instrumentos para a reflexão.
-    
-    Nesta prateleira digital, você encontrará o fruto das nossas vivências e estudos, organizados para fortalecer a sua identidade e o seu caminhar. Cada página é um pedaço da nossa essência entregue a você. Que estas palavras sejam companheiras de jornada, trazendo clareza para os seus dias e beleza para a sua história.
-    
-    **Prepare uma xícara de café, escolha o seu título abaixo e desfrute deste momento de descoberta.** Nossa biblioteca está apenas começando, e é uma honra ter você aqui desde o primeiro capítulo.
     """)
     st.link_button("☕ ACESSAR BIBLIOTECA DIGITAL", "https://drive.google.com/drive/folders/1i9UQn39hkamqAefA3-bsErfadjObVhSF")
 
@@ -191,6 +197,7 @@ pg = st.navigation({
     "Maison": [
         st.Page(pagina_inicio, title="A Maison L'Idée", icon="🏛️"),
         st.Page(pagina_jessica, title="Quem Sou Eu", icon="⚜️"),
+        st.Page(pagina_boutique, title="Boutique Maison L'Idée", icon="🛍️"),
         st.Page(pagina_biblioteca, title="Biblioteca Maison", icon="📚"),
     ],
     "Consultoria": [
