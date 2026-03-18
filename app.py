@@ -8,7 +8,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# Estilização CSS Maison (Mantendo sua identidade visual)
+# Estilização CSS Maison (Mantendo a identidade visual Marrom e Dourado)
 st.markdown("""
     <style>
     .main { background-color: #fcfaf7; }
@@ -29,8 +29,7 @@ st.markdown("""
 def pagina_inicio():
     st.title("🏛️ Maison L’Idée")
     st.subheader("Onde a Alma Encontra sua Imagem")
-    if os.path.exists("banner.png"): 
-        st.image("banner.png")
+    if os.path.exists("banner.png"): st.image("banner.png")
     st.markdown("""
     A Maison L’Idée (A Casa da Ideia) não é apenas um espaço de consultoria de imagem; é um refúgio dedicado à revelação da identidade. Acreditamos que a beleza não é algo que se cria do zero, mas algo que se descobre e se organiza.
     
@@ -72,8 +71,8 @@ def pagina_boutique():
     
     **Toque no botão abaixo para entrar na nossa comunidade e conferir as novidades:**
     """)
-    # Link do WhatsApp que você solicitou
-    st.link_button("💎 ACESSAR VITRINE NO WHATSAPP", "https://chat.whatsapp.com/SEU_LINK_DO_GRUPO")
+    # LINK DO WHATSAPP ATUALIZADO
+    st.link_button("💎 ACESSAR VITRINE NO WHATSAPP", "https://chat.whatsapp.com/Eas6zL3u7H4IqpqwtiDVEj")
 
 def pagina_maternar():
     st.title("🕊️ Maternar Leve")
